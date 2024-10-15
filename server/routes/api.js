@@ -43,4 +43,27 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Get all items
+router.get('/items', authMiddleware, async (req, res) => {
+    const items = await Item.find({ user: req.user.id });
+    res.json(items);
+  });
+  
+  // Add a new item
+  router.post('/items', authMiddleware, async (req, res) => {
+    const { name, description, price, imageUrl } = req.body;
+  
+    const newItem = new Item({
+      name,
+      description,
+      price,
+      imageUrl,
+      user: req.user.id
+    });
+  
+    const item = await newItem.save();
+    res.status(201).json(item);
+  });
+  
+
 module.exports = router;

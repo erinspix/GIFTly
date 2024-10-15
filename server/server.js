@@ -4,6 +4,9 @@ const path = require('path');
 const apiRoutes = require('./routes/api');
 require('dotenv').config();
 
+const connectDB = require('./config/db');
+connectDB();
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
