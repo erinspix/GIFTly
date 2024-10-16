@@ -1,10 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const apiRoutes = require('./routes/api');
+const apiRoutes = require('./server/routes/api');
 require('dotenv').config();
 
-const connectDB = require('./config/db');
+const connectDB = require('./server/config/db');
 connectDB();
 
 const app = express();
