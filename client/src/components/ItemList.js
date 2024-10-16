@@ -1,23 +1,22 @@
 import React from 'react';
 import useFetch from '../hooks/useFetch';
+import ItemCard from './ItemCard';
+import './ItemList.css'; // Import the CSS file
 
 const ItemList = () => {
-  const { data: items, loading, error } = useFetch('/api/items', localStorage.getItem('token'));
+    const { data: items, loading, error } = useFetch('/api/items', localStorage.getItem('token'));
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
 
-  return (
-    <div>
-      {items && items.map(item => (
-        <div key={item._id}>
-          <h3>{item.name}</h3>
-          <p>{item.description}</p>
-          <p>${item.price}</p>
+    return (
+        <div className="item-list">
+            {items && items.map(item => (
+                <ItemCard key={item._id} item={item} />
+            ))}
         </div>
-      ))}
-    </div>
-  );
+    );
 };
 
 export default ItemList;
+
