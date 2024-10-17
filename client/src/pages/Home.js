@@ -1,44 +1,30 @@
-import React, { useState } from 'react';
-import '../public/css/home'; // You'll create this CSS file
+
+import React, { useEffect, useState } from 'react';
+import ItemList from '../components/ItemList';
+import axios from 'axios';
 
 const Home = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+    const [items, setItems] = useState([]);
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Add login logic here (e.g., call an API)
-    console.log('Logging in with:', { username, password });
-  };
+    useEffect(() => {
+        const fetchItems = async () => {
+            try {
+                const response = await axios.get('/api/items'); // Adjust endpoint as needed
+                setItems(response.data);
+            } catch (error) {
+                console.error('Error fetching items:', error);
+            }
+        };
 
-  return (
-    <div className="home-container">
-      <h1 className="title">GIFTly</h1>
-      <form className="login-form" onSubmit={handleLogin}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
+        fetchItems();
+    }, []);
+
+    return (
+        <div>
+            <h2>Item List</h2>
+            <ItemList items={items} />
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="login-button">Log In</button>
-      </form>
-    </div>
-  );
+    );
 };
 
 export default Home;

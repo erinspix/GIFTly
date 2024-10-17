@@ -1,0 +1,18 @@
+/* src/styles/ItemCard.css */
+.item-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 10px;
+    text-align: center;
+    background-color: #f8f8f8;
+    transition: transform 0.2s;
+}
+
+.item-card:hover {
+    transform: scale(1.05);
+}
+
+.item-card h3 {
+    margin: 0;
+}

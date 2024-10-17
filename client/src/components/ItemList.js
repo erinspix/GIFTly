@@ -1,23 +1,32 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import useFetch from '../hooks/useFetch';
+import ItemCard from './ItemCard';
+import SearchBar from './SearchBar';
+import './ItemList.css';
 
 const ItemList = () => {
-  const { data: items, loading, error } = useFetch('/api/items', localStorage.getItem('token'));
+    const { data: items, loading, error } = useFetch('/api/items', localStorage.getItem('token'));
+    const [searchTerm, setSearchTerm] = useState('');
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
 
-  return (
-    <div>
-      {items && items.map(item => (
-        <div key={item._id}>
-          <h3>{item.name}</h3>
-          <p>{item.description}</p>
-          <p>${item.price}</p>
+    // Filter items based on search term
+    const filteredItems = items.filter(item =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    return (
+        <div className="item-list">
+            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            {filteredItems && filteredItems.map(item => (
+                <ItemCard key={item._id} item={item} />
+            ))}
         </div>
-      ))}
-    </div>
-  );
+    );
 };
 
 export default ItemList;
+
+
