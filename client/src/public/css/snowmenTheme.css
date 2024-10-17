@@ -7,6 +7,17 @@
     .navbar {
       background: linear-gradient(135deg, #e91c30, #1b456f); /* Bright red and navy gradient */
     }
+  /* Example: Gold Snow Theme */
+.fixed-bg {
+    background: url('../images/Snowmens.png') center top no-repeat;
+    background-size: cover;
+    height: 400px; /* Adjust as needed */
+    position: fixed;
+    width: 100%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+  }
   
     /* Item Card */
     .item-card {

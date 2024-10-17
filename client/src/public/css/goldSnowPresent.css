@@ -7,6 +7,18 @@
     .navbar {
       background: linear-gradient(135deg, #f9d2b4, #cdcbd4); /* Soft peach and grayish purple */
     }
+
+.fixed-bg {
+    background: url('../images/Gold-Snow-Present.png') center top no-repeat;
+    background-size: cover;
+    height: 400px; /* Adjust as needed */
+    position: fixed;
+    width: 100%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+  }
+  
   
     /* Item Card */
     .item-card {
