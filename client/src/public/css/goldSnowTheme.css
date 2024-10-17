@@ -1,0 +1,27 @@
+/* Gold Snow Theme */
+.theme-gold-snow {
+    background-color: #eaebf0; /* Light blueish gray */
+    color: #314a16; /* Dark contrasting color for text */
+  
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(135deg, #f1e2c7, #d3e4ee); /* Light gold and soft blue gradient */
+    }
+  
+    /* Item Card */
+    .item-card {
+      border: 2px solid #d3ccc4; /* Light taupe border */
+      background: #ffefce; /* Soft cream background for the card */
+    }
+  
+    /* Buttons */
+    .add-to-cart-btn {
+      background: #f1e2c7; /* Light gold button */
+      color: #314a16; /* Dark green text */
+    }
+  
+    .add-to-cart-btn:hover {
+      background: #d3ccc4; /* Light taupe hover */
+    }
+  }
+  

@@ -1,0 +1,27 @@
+/* Snowmen Theme */
+.theme-snowmen {
+    background-color: #f0ebe5; /* Soft beige background */
+    color: #1b456f; /* Dark navy text */
+  
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(135deg, #e91c30, #1b456f); /* Bright red and navy gradient */
+    }
+  
+    /* Item Card */
+    .item-card {
+      border: 2px solid #e91c30; /* Bright red border */
+      background: #f0ebe5; /* Soft beige background */
+    }
+  
+    /* Buttons */
+    .add-to-cart-btn {
+      background: #e91c30; /* Bright red button */
+      color: #f0ebe5; /* Beige text */
+    }
+  
+    .add-to-cart-btn:hover {
+      background: #1b456f; /* Dark navy hover */
+    }
+  }
+  

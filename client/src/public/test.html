@@ -4,26 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/home.css">
-  <title>Giftly - Shopping</title>
+  <link rel="stylesheet" href="./css/home.css"> <!-- Your CSS file with themes -->
+  <title>Giftly - Winter Gifts</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" href="./favicon.ico" type="image/x-icon">
 </head>
 <body>
-  <!-- Navigation Bar -->
+  <!-- Main Title -->
+  <header class="main-header">
+    <h1 class="main-title">Giftly - Winter Wonderland</h1>
+  </header>
+
+  <!-- Navigation Links -->
   <nav class="navbar">
-    <div class="logo">Giftly</div>
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
-      <li><a href="/collection">My Collection</a></li>
-      <li><a href="/cart">Cart</a></li>
+      <li><a href="/lists">Lists</a></li>
+      <li><a href="/popular">Popular</a></li>
+      <li><a href="/search">Search</a></li>
     </ul>
   </nav>
-
-  <!-- Search Bar -->
-  <section class="search-section">
-    <input type="text" class="search-bar" placeholder="Search for gifts...">
-  </section>
 
   <!-- Shopping Grid -->
   <section class="shopping-grid">
@@ -42,9 +42,17 @@
     <!-- Add more item-cards as needed -->
   </section>
 
+  <!-- Placeholder Button -->
+  <div class="placeholder-btn-container">
+    <button class="placeholder-btn">See More Gifts</button>
+  </div>
+
   <!-- Footer -->
   <footer class="footer">
     <p>© 2024 Giftly. All rights reserved.</p>
   </footer>
+
+  <!-- JavaScript to Randomly Select Theme -->
+  <script src="./themeRandomize.js"></script>
 </body>
 </html>
