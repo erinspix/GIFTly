@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/home.css"> <!-- Your CSS file with themes -->
+  <title>Giftly - Winter Wonderland</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <!-- Main Title -->
+  <header class="main-header">
+    <h1 class="main-title">Giftly - Winter Wonderland</h1>
+  </header>
+
+  <!-- Search Section Positioned Below the Header -->
+  <div class="search-section">
+    <input type="text" class="search-bar" placeholder="Search for gifts...">
+  </div>
+
+  <!-- Navigation Links Positioned Below the Search Bar -->
+  <nav class="navbar">
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cart">Cart</a></li>
+      <li><a href="/past-orders">Past Orders</a></li>
+      <li><a href="/surprise-me">Surprise Me</a></li>
+    </ul>
+  </nav>
+
+  <!-- Fixed Background Image -->
+  <div class="fixed-bg"></div>
+  <div class="gradient-transition"></div>
+
+  <!-- Main Shopping Box with Grid -->
+  <div class="shopping-box">
+    <section class="shopping-grid">
+      <div class="item-card">
+        <img src="https://via.placeholder.com/150" alt="Gift Item 1" class="item-image">
+        <h3 class="item-title">Cozy Sweater</h3>
+        <p class="item-price">$49.99</p>
+        <button class="add-to-cart-btn">Add to Cart</button>
+      </div>
+      <div class="item-card">
+        <img src="https://via.placeholder.com/150" alt="Gift Item 2" class="item-image">
+        <h3 class="item-title">Winter Mug</h3>
+        <p class="item-price">$19.99</p>
+        <button class="add-to-cart-btn">Add to Cart</button>
+      </div>
+      <div class="item-card">
+        <img src="https://via.placeholder.com/150" alt="Gift Item 3" class="item-image">
+        <h3 class="item-title">Snow Boots</h3>
+        <p class="item-price">$59.99</p>
+        <button class="add-to-cart-btn">Add to Cart</button>
+      </div>
+      <div class="item-card">
+        <img src="https://via.placeholder.com/150" alt="Gift Item 4" class="item-image">
+        <h3 class="item-title">Winter Hat</h3>
+        <p class="item-price">$24.99</p>
+        <button class="add-to-cart-btn">Add to Cart</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Placeholder Button -->
+  <div class="placeholder-btn-container">
+    <button class="placeholder-btn">See More Gifts</button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2024 Giftly. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript to Randomly Select Theme -->
+  <script src="./themeRandomize.js"></script>
+</body>
+</html>

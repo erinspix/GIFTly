@@ -1,33 +1,18 @@
+
 // server/routes/api.js
+
 
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const Item = require('../models/Item'); // Import Item model
-const authMiddleware = require('../middleware/authMiddleware'); // Import auth middleware
 
-// Register route
-router.post('/register', async (req, res) => {
-    try {
-        const { username, email, password } = req.body;
-        const userExists = await User.findOne({ email });
-
-        if (userExists) return res.status(400).json({ message: "User already exists" });
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ username, email, password: hashedPassword });
-        await user.save();
-
-        res.status(201).json({ message: "User created successfully" });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
 });
 
 // Login route
 router.post('/login', async (req, res) => {
+
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
@@ -43,10 +28,12 @@ router.post('/login', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
+
 });
 
 // Get all items
 router.get('/items', authMiddleware, async (req, res) => {
+
     try {
         const items = await Item.find({ user: req.user.id });
         res.json(items);
@@ -75,4 +62,5 @@ router.post('/items', authMiddleware, async (req, res) => {
 });
 
 module.exports = router;
+
 

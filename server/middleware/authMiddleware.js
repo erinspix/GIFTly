@@ -1,3 +1,4 @@
+
 // server/middleware/authMiddleware.js
 module.exports = (req, res, next) => {
   // Example check: you might want to check if a user is authenticated
