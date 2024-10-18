@@ -1,0 +1,8 @@
+{
+    "name": "Giftly",
+    "short_name": "Giftly",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "A beautiful winter-themed shopping experience."
+}
