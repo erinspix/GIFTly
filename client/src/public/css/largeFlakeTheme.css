@@ -1,0 +1,38 @@
+/* Large Snowflake Theme */
+.theme-snowflake {
+    background-color: #cadef1; /* Soft sky blue background */
+    color: #022d50; /* Dark navy text */
+  
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(135deg, #1a557c, #cadef1); /* Deep navy and sky blue gradient */
+    }
+  /* Example: Gold Snow Theme */
+.fixed-bg {
+    background: url('../images/Large-Flake.png') center top no-repeat;
+    background-size: cover;
+    height: 400px; /* Adjust as needed */
+    position: fixed;
+    width: 100%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+  }
+  
+    /* Item Card */
+    .item-card {
+      border: 2px solid #1a557c; /* Deep navy border */
+      background: #fffefc; /* White background for cards */
+    }
+  
+    /* Buttons */
+    .add-to-cart-btn {
+      background: #1a557c; /* Deep navy blue button */
+      color: #fffefc; /* White text */
+    }
+  
+    .add-to-cart-btn:hover {
+      background: #022d50; /* Dark navy hover */
+    }
+  }
+  
