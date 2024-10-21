@@ -5,8 +5,8 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const Item = require('../models/Item'); // Assuming you have an Item model
-const authMiddleware = require('../middleware/authMiddleware'); // Assuming you have auth middleware
+const Item = require('../models/Item');
+const authMiddleware = require('../middleware/authMiddleware');
 
 // Login route
 router.post('/login', async (req, res) => {
