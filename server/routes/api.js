@@ -1,18 +1,15 @@
-
 // server/routes/api.js
-
 
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-
-});
+const Item = require('../models/Item');
+const authMiddleware = require('../middleware/authMiddleware');
 
 // Login route
 router.post('/login', async (req, res) => {
-
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
@@ -28,12 +25,10 @@ router.post('/login', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
-
 });
 
 // Get all items
 router.get('/items', authMiddleware, async (req, res) => {
-
     try {
         const items = await Item.find({ user: req.user.id });
         res.json(items);
@@ -62,5 +57,3 @@ router.post('/items', authMiddleware, async (req, res) => {
 });
 
 module.exports = router;
-
-
