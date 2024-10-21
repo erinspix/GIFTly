@@ -3,7 +3,7 @@ const themes = [
     { name: "presentTheme", cssFile: './css/goldSnowPresent.css' },
     { name: "snowflakeTheme", cssFile: './css/largeFlakeTheme.css' },
     { name: "treeBranchTheme", cssFile: './css/snowyTreeTheme.css' },
-    { name: "snowmenTheme", cssFile: 'css/snowmenTheme.css' }
+    { name: "snowmenTheme", cssFile: './css/snowmenTheme.css' }
 ];
 
 // Function to randomly select and apply a theme
@@ -13,7 +13,7 @@ function applyRandomTheme() {
     linkElement.rel = 'stylesheet';
     linkElement.href = randomTheme.cssFile;
     linkElement.type = 'text/css';
-    
+
     // Append the <link> element to the <head> section
     document.head.appendChild(linkElement);
 
@@ -21,5 +21,5 @@ function applyRandomTheme() {
     console.log(`Applied theme: ${randomTheme.name}`);
 }
 
-// Call the function to apply the theme on page load
-window.onload = applyRandomTheme;
+// Wait for the DOM to fully load before applying the theme
+document.addEventListener('DOMContentLoaded', applyRandomTheme);
