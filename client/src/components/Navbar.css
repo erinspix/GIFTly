@@ -1,0 +1,36 @@
+/* src/styles/Navbar.css */
+
+nav {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text color */
+    padding: 15px 20px; /* Padding around the nav */
+    display: flex; /* Flexbox for layout */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Center items vertically */
+}
+
+nav h1 {
+    margin: 0; /* Remove default margin */
+    font-size: 1.5em; /* Larger font size */
+}
+
+nav ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Flexbox for horizontal layout */
+}
+
+nav li {
+    margin-left: 20px; /* Space between links */
+}
+
+nav a {
+    color: white; /* White link color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+nav a:hover {
+    color: #ffc107; /* Change color on hover */
+}
