@@ -1,28 +1,32 @@
-
 import React, { useEffect, useState } from 'react';
 import ItemList from '../components/ItemList';
 import axios from 'axios';
 
 const Home = () => {
     const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const response = await axios.get('/api/items'); // Adjust endpoint as needed
+                const response = await axios.get('/api/items');
                 setItems(response.data);
-            } catch (error) {
-                console.error('Error fetching items:', error);
+                setLoading(false);
+            } catch (err) {
+                setError('Failed to load items');
+                setLoading(false);
             }
         };
-
         fetchItems();
     }, []);
 
     return (
         <div>
             <h2>Item List</h2>
-            <ItemList items={items} />
+            {loading && <p>Loading...</p>}
+            {error && <p>{error}</p>}
+            {!loading && !error && <ItemList items={items} />}
         </div>
     );
 };
