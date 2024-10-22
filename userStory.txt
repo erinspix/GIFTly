@@ -1,0 +1,24 @@
+AS A shopper looking for unique and personalized gifts
+I WANT an easy-to-use holiday shopping helper app
+SO THAT I can browse and purchase handmade gifts tailored to my friends and family
+
+User Story Breakdown:
+GIVEN a Progressive Web App (PWA) that curates handmade gift items from various sources
+WHEN I open the app
+THEN I am presented with a homepage that features a search bar, navigation links, and a curated list of gift ideas based on previous shopping trends and preferences
+
+WHEN I search for a specific item
+THEN I can view a list of available items from the database with relevant details, including name, price, craftsman name, and location
+
+WHEN I click on an item
+THEN I am taken to a detailed page showing the item’s description, price, craftsman information, and a link to purchase it
+
+WHEN I add an item to my cart
+THEN the item is saved, and I can view my cart at any time to see a summary of the items I’ve selected
+
+WHEN I check out
+THEN I am prompted to securely input my payment information and shipping address, and the app confirms the purchase
+
+WHEN I choose the “Surprise Me” feature
+THEN I am shown a random gift idea based on my shopping history and preferences
+
