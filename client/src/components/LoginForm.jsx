@@ -4,10 +4,9 @@ import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 
-
 const LoginForm = () => {
     const { login } = useContext(AuthContext);
-    const history = useHistory();
+    const history = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 

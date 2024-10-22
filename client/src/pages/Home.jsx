@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import ItemList from '../components/ItemList';
+// import ItemList from '../components/ItemList';
 import axios from 'axios';
 
 const Home = () => {
@@ -26,7 +26,7 @@ const Home = () => {
             <h2>Item List</h2>
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
-            {!loading && !error && <ItemList items={items} />}
+            {/* !loading && !error && <ItemList items={items} /> */}
         </div>
     );
 };
