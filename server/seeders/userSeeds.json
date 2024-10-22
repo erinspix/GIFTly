@@ -1,0 +1,29 @@
+[
+    {
+        "username": "Penny White",
+        "email": "penny@gmail.com",
+        "password":"password01"
+
+    },
+    {
+        
+        "username": "Sheldon Copper",
+        "email": "sheldon@gmail.com",
+        "password":"password02"
+
+    },
+    {
+        
+        "username": "Howard Wolowitz",
+        "email": "howard@gmail.com",
+        "password":"password03"
+
+    },
+    {
+        
+        "username": "Leonard Hofstadter",
+        "email": "penny@gmail.com",
+        "password":"password04"
+
+    }
+]
