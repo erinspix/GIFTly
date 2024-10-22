@@ -1,15 +1,13 @@
-
 // server/config/db.js
 
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGODB_URI, {
-            // Remove the deprecated options
-            // useNewUrlParser: true,
-            // useUnifiedTopology: true,
-        });
+        // Debugging: Log the MongoDB URI
+        console.log('MongoDB URI:', process.env.MONGODB_URI);
+        
+        await mongoose.connect(process.env.MONGODB_URI);
         console.log('MongoDB connected');
     } catch (error) {
         console.error('MongoDB connection error:', error);
@@ -18,5 +16,3 @@ const connectDB = async () => {
 };
 
 module.exports = connectDB;
-
-

@@ -1,31 +1,32 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require('path');
-const apiRoutes = require('./routes/api');
 require('dotenv').config();
+const path = require('path');
 
-const connectDB = require('./config/db');
-connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
-app.use('/api', apiRoutes);
 
-// Serve static files in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
-  });
-}
+
+app.use(express.static(path.join(__dirname, '../client')));
+
+app.use('/assets', express.static('assets'));
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/giftly_db', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/giftly_db', {})
+    .then(() => {
+        console.log('Connected to MongoDB');
+    })
+    .catch((error) => {
+        console.error('Error connecting to MongoDB:', error);
+    });
+
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/public/index.html'));
+    });
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
