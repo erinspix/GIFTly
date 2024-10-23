@@ -6,7 +6,7 @@ require('dotenv').config();
 const path = require('path');
 const typeDefs = require('./schema/typeDefs');
 const resolvers = require('./schema/resolvers');
-
+const db = require("./config/db")
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -39,17 +39,13 @@ const startApolloServer = async () => {
     
     app.use('/assets', express.static('assets'));
     
-    // Connect to MongoDB
-    mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/giftly_db', {})
-        .then(() => {
-            console.log('Connected to MongoDB');
-            app.listen(PORT, () => {
-                console.log(`Server running on port ${PORT}`);
-            });
-        })
-        .catch((error) => {
-            console.error('Error connecting to MongoDB:', error);
+    db.once('open', () => {
+        app.listen(PORT, () => {
+          console.log(`API server running on port ${PORT}!`);
+          console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
         });
+      });
+    
     
     /*
     app.get('/', (req, res) => {
