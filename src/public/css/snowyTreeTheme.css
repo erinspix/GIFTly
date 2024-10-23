@@ -1,0 +1,38 @@
+/* Tree-Branch Theme */
+.theme-tree-branch {
+    background-color: #fff3c6; /* Light cream background */
+    color: #3f8497; /* Deep blue-green text */
+  
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(135deg, #89bdbc, #a6cbd0); /* Soft and light teal gradient */
+    }
+  
+    /* Item Card */
+    .item-card {
+      border: 2px solid #bd9462; /* Earthy brown border */
+      background: #fff3c6; /* Light cream background */
+    }
+  /* Example: Gold Snow Theme */
+.fixed-bg {
+    background: url('../images/Snowy-Tree.png') center top no-repeat;
+    background-size: cover;
+    height: 400px; /* Adjust as needed */
+    position: fixed;
+    width: 100%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+  }
+  
+    /* Buttons */
+    .add-to-cart-btn {
+      background: #3f8497; /* Deep blue-green button */
+      color: #fff3c6; /* Light cream text */
+    }
+  
+    .add-to-cart-btn:hover {
+      background: #bd9462; /* Earthy brown hover */
+    }
+  }
+  

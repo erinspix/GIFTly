@@ -1,33 +1,33 @@
-const db = require('../config/db');
+// server/seeders/seed.js
+const db = require('../config/db'); // Importing Mongoose connection
 const { User, Item } = require('../models');
 const userSeeds = require('./userSeeds.json');
 const itemSeeds = require('./itemSeeds.json');
 const cleanDB = require('./cleanDB');
 
 db.once('open', async () => {
-  try {
-    await cleanDB('Item', 'items');
+    try {
+        // Clean 'Item' collection
+        await cleanDB('Item', 'items');
 
-    await cleanDB('User', 'users');
+        // Clean 'User' collection
+        await cleanDB('User', 'users');
 
-    await User.create(userSeeds);
+        // Create users from seed data
+        await User.create(userSeeds);
 
-    for (let i = 0; i < itemSeeds.length; i++) {
-      const { _id, item} = await Item(itemSeeds[i]);
-      const user = await User.findOneAndUpdate(
-        { username: itemUser },
-        {
-          $addToSet: {
-            thoughts: _id,
-          },
+        // Create items from seed data and associate with users
+        for (let i = 0; i < itemSeeds.length; i++) {
+            const item = await Item.create(itemSeeds[i]);
+            const user = await User.findOneAndUpdate(
+                { username: item.itemUser },
+                { $addToSet: { items: item._id } }
+            );
         }
-      );
+        console.log('All done!');
+        process.exit(0);
+    } catch (err) {
+        console.error(err);
+        process.exit(1);
     }
-  } catch (err) {
-    console.error(err);
-    process.exit(1);
-  }
-
-  console.log('all done!');
-  process.exit(0);
 });

@@ -1,0 +1,21 @@
+.item-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.item-card:hover {
+    transform: scale(1.05);
+}
+
+.item-image {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.item-title {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}

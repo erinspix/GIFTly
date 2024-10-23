@@ -1,5 +1,3 @@
-// server/routes/api.js
-
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
@@ -28,11 +26,21 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Get all items
-router.get('/items', authMiddleware, async (req, res) => {
+// Get all items without auth (for debugging)
+router.get('/items', async (req, res) => {
     try {
-        // Assuming `Item` has a reference to the user ID for ownership
-        const items = await Item.find({ user: req.user.id }); 
+        const items = await Item.find({});
+        res.json(items);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Get items for a specific user
+router.get('/user-items', authMiddleware, async (req, res) => {
+    try {
+        // Find items for the logged-in user
+        const items = await Item.find({ user: req.user.id });
         res.json(items);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -50,7 +58,7 @@ router.post('/items', authMiddleware, async (req, res) => {
             description,
             price,
             imageUrl,
-            user: req.user.id // Assume the Item model has a reference to the user
+            user: req.user.id // Link item to the logged-in user
         });
 
         const item = await newItem.save();
