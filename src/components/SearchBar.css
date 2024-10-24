@@ -1,0 +1,14 @@
+/* src/components/SearchBar.css */
+
+.search-bar {
+    margin: 20px; /* Margin around the search bar */
+    display: flex; /* Flexbox for layout */
+    justify-content: center; /* Center the input */
+}
+
+.search-bar input {
+    padding: 10px; /* Padding inside the input */
+    border: 1px solid #ccc; /* Border around the input */
+    border-radius: 4px; /* Rounded corners */
+    width: 300px; /* Fixed width for the input */
+}

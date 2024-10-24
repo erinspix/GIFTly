@@ -1,9 +1,13 @@
 // server/server.js
 
 const express = require('express');
+const { ApolloServer } = require('@apollo/server');
+const { expressMiddleware } = require('@apollo/server/express4');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const path = require('path');
+const typeDefs = require('./schema/typeDefs');
+const resolvers = require('./schema/resolvers');
 
 const { ApolloServer } = require('apollo-server-express');
 const typeDefs = require('./schema/typeDefs');

@@ -1,0 +1,39 @@
+/* Gold Snow with Present Theme */
+.theme-gold-present {
+    background-color: #ffefce; /* Soft cream background */
+    color: #ad3040; /* Deep red text */
+  
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(135deg, #f9d2b4, #cdcbd4); /* Soft peach and grayish purple */
+    }
+
+.fixed-bg {
+    background: url('../images/Gold-Snow-Present.png') center top no-repeat;
+    background-size: cover;
+    height: 400px; /* Adjust as needed */
+    position: fixed;
+    width: 100%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+  }
+  
+  
+    /* Item Card */
+    .item-card {
+      border: 2px solid #ad3040; /* Deep red border */
+      background: #ffefce; /* Soft cream background */
+    }
+  
+    /* Buttons */
+    .add-to-cart-btn {
+      background: #ad3040; /* Deep red button */
+      color: #ffefce; /* Cream text */
+    }
+  
+    .add-to-cart-btn:hover {
+      background: #314a16; /* Dark green hover */
+    }
+  }
+  
