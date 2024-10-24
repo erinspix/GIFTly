@@ -1,70 +1,41 @@
-const typeDefs = `
-  type Category {
-    _id: ID
-    name: String
-  }
+const { gql } = require('apollo-server-express');
 
-  type Product {
-    _id: ID
-    name: String
-    description: String
-    image: String
-    quantity: Int
-    price: Float
-    category: Category
-  }
+const typeDefs = gql`
+    type User {
+        _id: ID!
+        username: String!
+        email: String!
+        createdAt: String!
+        # Add fields like cart or orders if needed
+    }
 
-  type Order {
-    _id: ID
-    purchaseDate: String
-    products: [Product]
-  }
+    type Product {
+        _id: ID!
+        name: String!
+        price: Float!
+        craftsman: String!
+        location: String!
+        imageUrl: String!
+        createdAt: String!
+    }
 
-  type User {
-    _id: ID
-    firstName: String
-    lastName: String
-    email: String
-    collections: [Collection]
-    orders: [Order]
-  }
+    type Auth {
+        token: ID!
+        user: User
+    }
 
-  type Collection {
-    _id: ID
-    name: String
-    description: String
-    user: User
-  }
+    type Query {
+        me: User
+        users: [User]
+        products: [Product]
+        product(id: ID!): Product
+    }
 
-  type Auth {
-    token: ID
-    user: User
-  }
-
-  type Checkout {
-    session: ID
-  }
-
-  type Query {
-    categories: [Category]
-    products(category: ID, name: String): [Product]
-    product(_id: ID!): Product
-    user: User
-    order(_id: ID!): Order
-    checkout(products: [ID]!): Checkout
-    allUsers: [User]
-    findUser(email: String): User
-  }
-
-  type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    login(email: String!, password: String!): Auth
-    addOrder(products: [ID]!): Order
-    updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateProduct(_id: ID!, quantity: Int!): Product
-    addCollection(name: String!, description: String!): Collection
-    updateCollection(_id: ID!, name: String, description: String): Collection
-  }
+    type Mutation {
+        addUser(username: String!, email: String!, password: String!): Auth
+        login(email: String!, password: String!): Auth
+        # Additional mutations like addToCart, removeFromCart can be added
+    }
 `;
 
 module.exports = typeDefs;

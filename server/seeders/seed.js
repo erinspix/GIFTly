@@ -1,33 +1,45 @@
 // server/seeders/seed.js
-const db = require('../config/db'); // Importing Mongoose connection
-const { User, Item } = require('../models');
-const userSeeds = require('./userSeeds.json');
-const itemSeeds = require('./itemSeeds.json');
-const cleanDB = require('./cleanDB');
 
-db.once('open', async () => {
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const User = require('../models/User');
+const Product = require('../models/Product');
+
+// Load environment variables
+dotenv.config();
+
+// import userSeed.json
+const users = require('./userSeeds.json');
+
+
+// load productSeed.json
+const products = require('./productSeed.json');
+
+// Seed Function
+const seedDB = async () => {
     try {
-        // Clean 'Item' collection
-        await cleanDB('Item', 'items');
+        // Connect to MongoDB
+        await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/giftly_db', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log('Connected to MongoDB for seeding');
 
-        // Clean 'User' collection
-        await cleanDB('User', 'users');
+        // Insert Users
+        await User.create(users);
+        console.log('Users inserted');
 
-        // Create users from seed data
-        await User.create(userSeeds);
+        // Insert Products
+        await Product.create(products);
+        console.log('Products inserted');
 
-        // Create items from seed data and associate with users
-        for (let i = 0; i < itemSeeds.length; i++) {
-            const item = await Item.create(itemSeeds[i]);
-            const user = await User.findOneAndUpdate(
-                { username: item.itemUser },
-                { $addToSet: { items: item._id } }
-            );
-        }
-        console.log('All done!');
-        process.exit(0);
-    } catch (err) {
-        console.error(err);
-        process.exit(1);
+        // Disconnect from MongoDB
+        mongoose.disconnect();
+        console.log('Database seeding completed and disconnected');
+    } catch (error) {
+        console.error('Error seeding the database:', error);
     }
-});
+};
+
+// Execute the seed function
+seedDB();
