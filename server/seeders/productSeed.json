@@ -4,26 +4,19 @@
         "price": "35.99",
         "craftsman": "Emma Thompson",
         "location": "Aspen, USA",
-        "imageUrl": "./assets/wooden bowl.png",
-        "tags": [],
-        "rating": {
-            "max": 5,
-            "min": 0
-        }
+        "imageUrl": "./assets/wooden bowl.png"
+       
     },
     {
         "name": "Organic Cotton Scarf",
         "price": "24.50",
         "craftsman": "Olivia Lee",
         "location": "Brighton, UK",
-        "imageUrl": "./assets/organic-cotton-scarf.png",
-        "tags": [],
-        "rating": {
-            "max": 5,
-            "min": 0
+        "imageUrl": "./assets/organic-cotton-scarf.png"
+       
        
     
-        }
+        
 
        
     },
@@ -32,12 +25,9 @@
         "price": "18.00",
         "craftsman" : "Jack Martin",
         "location": "Melbourne,Australia",
-        "imageUrl": "./assets/ceramic-coffee-mug.png",
-        "tags": [],
-        "rating": {
-            "max": 5,
-            "min": 0
-        }
+        "imageUrl": "./assets/ceramic-coffee-mug.png"
+       
+        
     },
      
     {
@@ -46,12 +36,8 @@
         "price": "29.99",
         "craftsman" : "Sophia Garcia",
         "location": "Barcelona,Spain",
-        "imageUrl": "./assets/bamboo-serving-tray.png",
-        "tags": [],
-        "rating": {
-            "max": 5,
-            "min": 0
-        }
+        "imageUrl": "./assets/bamboo-serving-tray.png"
+        
     
     },
     {
@@ -60,12 +46,8 @@
         "price": "60.00",
         "craftsman" : "Harper Rvans",
         "location": "Kyoto,Japan",
-        "imageUrl": "./assets/hand-dyed-silk-scarves.png",
-        "tags": [],
-        "rating": {
-            "max": 5,
-            "min": 0
-        }
+        "imageUrl": "./assets/hand-dyed-silk-scarves.png"
+        
     },
     {
         
@@ -73,25 +55,17 @@
         "price": "42.75",
         "craftsman" : "Daniel Kim",
         "location": "Seoul,South Korea",
-        "imageUrl": "./assets/recycled-glass-vase.png",
-        "tags": [],
-        "rating": {
-            "max": 5,
-            "min": 0
-        }
+        "imageUrl": "./assets/recycled-glass-vase.png"
     },
+       
     {
         
         "name": "Leather Journal",
         "price": "29.99",
         "craftsman" : "Liam Patel",
         "location": "Mumbai,India",
-        "imageUrl": "./assets/leather-journal.png",
-        "tags": [],
-        "rating": {
-            "max": 5,
-            "min": 0
-        }
+        "imageUrl": "./assets/leather-journal.png"
+       
     },
     {
         
@@ -99,12 +73,8 @@
         "price": "19.99",
         "craftsman" : "Amelia Baker",
         "location": "Dublin,Ireland",
-        "imageUrl": "./assets/wool-knit-hat.png",
-        "tags": [],
-        "rating": {
-            "max": 5,
-            "min": 0
-        }
+        "imageUrl": "./assets/wool-knit-hat.png"
+       
     },
     {
         
@@ -112,12 +82,8 @@
         "price": "16.50",
         "craftsman" : "Ava Robinson",
         "location": "Portland,USA",
-        "imageUrl": "./assets/handmade-soup-set.png",
-        "tags": [],
-        "rating": {
-            "max": 5,
-            "min": 0
-        }
+        "imageUrl": "./assets/handmade-soup-set.png"
+      
     },
     {
         
@@ -125,12 +91,8 @@
         "price": "37.80",
         "craftsman" : "James Brown",
         "location": "London,UK",
-        "imageUrl": "./assets/upcycled-denim-bag.png",
-        "tags": [],
-        "rating": {
-            "max": 5,
-            "min": 0
-        }
+        "imageUrl": "./assets/upcycled-denim-bag.png"
+        
     },
     {
         
@@ -138,12 +100,8 @@
         "price": "27.99",
         "craftsman" : "Sophia Harris",
         "location": "Sydney,Australia",
-        "imageUrl": "./assets/clay-pendant-necklace.png",
-        "tags": [],
-        "rating": {
-            "max": 5,
-            "min": 0
-        }
+        "imageUrl": "./assets/clay-pendant-necklace.png"
+      
     },
     {
         
@@ -151,12 +109,8 @@
         "price": "14.99",
         "craftsman" : "Benjamin Clark",
         "location": "Berlin,Germany",
-        "imageUrl": "./assets/wooden-puzzle-game.png",
-        "tags": [],
-        "rating": {
-            "max": 5,
-            "min": 0
-        }
+        "imageUrl": "./assets/wooden-puzzle-game.png"
+        
     }
 ]
 
