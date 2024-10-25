@@ -40,7 +40,7 @@ const Products = () => {
             <Grid templateColumns="repeat(auto-fill, minmax(200px, 1fr))" gap={6}>
                 {data.products.map((product) => (
                     <Box key={product._id} borderWidth="1px" borderRadius="lg" overflow="hidden" p={4}>
-                        <Image src={`/assets/${product.imageUrl}`} alt={product.name} boxSize="150px" objectFit="cover" mx="auto" />
+                        <Image src={`/images/${product.imageUrl}`} alt={product.name} boxSize="150px" objectFit="cover" mx="auto" />
                         <Box mt={2}>
                             <VStack spacing={1} align="start">
                                 <Text fontWeight="bold" fontSize="lg">{product.name}</Text>
