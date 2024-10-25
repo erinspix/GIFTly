@@ -9,7 +9,7 @@ const Product = require('../models/Product');
 dotenv.config();
 
 // import userSeed.json
-const users = require('./userSeed.json');
+const users = require('./userSeeds.json');
 
 
 // load productSeed.json

@@ -1,58 +1,48 @@
-// server/server.js
-
 const express = require('express');
-const mongoose = require('mongoose');
-require('dotenv').config();
 const path = require('path');
-
-const { ApolloServer } = require('apollo-server-express');
-const typeDefs = require('./schema/typeDefs');
-const resolvers = require('./schema/resolvers');
+// Import the ApolloServer class
+const { ApolloServer } = require('@apollo/server');
+const { expressMiddleware } = require('@apollo/server/express4');
 const { authMiddleware } = require('./utils/auth');
 
-const app = express();
-const PORT = process.env.PORT || 5000;
+// Import the two parts of a GraphQL schema
+const { typeDefs, resolvers } = require('./schema');
+const db = require('./config/db');
 
-// Middleware to parse JSON
-app.use(express.json());
-
-// Serve static files from the client build
-app.use(express.static(path.join(__dirname, '../client/build')));
-
-// Serve assets (images) from the assets directory
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
-
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/giftly_db', {
-  
-})
-.then(() => {
-    console.log('Connected to MongoDB');
-})
-.catch((error) => {
-    console.error('Error connecting to MongoDB:', error);
-});
-
-// Initialize Apollo Server
+const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context: authMiddleware, // pass context for authentication
+  typeDefs,
+  resolvers,
 });
 
-// Apply Apollo middleware to Express app
-(async () => {
-    await server.start();
-    server.applyMiddleware({ app });
+const app = express();
 
-    // Fallback route to serve the React app for any unknown routes
+// Create a new instance of an Apollo server with the GraphQL schema
+const startApolloServer = async () => {
+  await server.start();
+  
+  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json());
+  
+  app.use('/graphql', expressMiddleware(server, {
+    context: authMiddleware
+  }));
+
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/dist')));
+
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../client/build/index.html'));
+      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
     });
+  }
 
-    // Start the server
+  db.once('open', () => {
     app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-        console.log(`GraphQL endpoint available at http://localhost:${PORT}${server.graphqlPath}`);
+      console.log(`API server running on port ${PORT}!`);
+      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
     });
-})();
+  });
+};
+
+// Call the async function to start the server
+startApolloServer();

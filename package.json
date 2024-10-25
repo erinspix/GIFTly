@@ -1,0 +1,23 @@
+{
+  "name": "giftly-1",
+  "version": "1.0.0",
+  "description": "Gift Finder is a web application designed to help users discover and manage gifts effortlessly. It features a user-friendly interface that allows users to search for gifts, manage their accounts, and view detailed information about each gift. The app includes multiple pages tailored to enhance the shopping experience, including a home page, user page, collection/cart page, gift detail page, and past orders/search results page.",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
+    "install": "cd server && npm install && cd ../client && npm install",
+    "start": "node server/server.js",
+    "client": "cd client && npm run dev",
+    "seed": "cd server && npm run seed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  },
+  "dependencies": {
+    "stripe": "^17.2.1"
+  }
+}
