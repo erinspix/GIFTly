@@ -28,7 +28,7 @@ const Register = () => {
         onCompleted: (data) => {
             const { token } = data.addUser;
             localStorage.setItem('id_token', token);
-            client.resetStore(); // Refetch active queries, including ME_QUERY
+        //    client.resetStore(); // Refetch active queries, including ME_QUERY
             navigate('/'); // Redirect to homepage after registration
         },
     });
@@ -48,6 +48,7 @@ const Register = () => {
                 variables: { ...formState },
             });
         } catch (err) {
+            console.log("err: ", err.message);
             console.error(err);
         }
     };

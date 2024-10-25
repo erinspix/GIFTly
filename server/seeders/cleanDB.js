@@ -7,10 +7,7 @@ const Product = require('../models/Product');
 dotenv.config();
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/giftly_db', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/giftly_db')
 .then(() => {
     console.log('Connected to MongoDB for cleaning DB');
     // Delete all documents from User and Product collections

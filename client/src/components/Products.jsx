@@ -25,6 +25,7 @@ const Products = () => {
     if (error) return <Text color="red.500">Error fetching products</Text>;
 
     const handleAddToCart = (product) => {
+        console.log("Auth Data: ", authData);
         if (authData && authData.me) {
             addToCart(product);
             window.dispatchEvent(new Event('storage')); // Trigger storage event to update cart count

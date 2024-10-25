@@ -19,10 +19,7 @@ const products = require('./productSeed.json');
 const seedDB = async () => {
     try {
         // Connect to MongoDB
-        await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/giftly_db', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/giftly_db');
         console.log('Connected to MongoDB for seeding');
 
         // Insert Users

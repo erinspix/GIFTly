@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const authMiddleware = ({ req }) => {
     // Allows token to be sent via req.body, req.query, or headers
@@ -8,7 +10,7 @@ const authMiddleware = ({ req }) => {
     if (req.headers.authorization) {
         token = token.split(' ').pop().trim(); // Remove "Bearer" from the string
     }
-
+    console.log("Incoming Token: ", token)
     if (!token) {
         return { user: null };
     }
@@ -16,6 +18,7 @@ const authMiddleware = ({ req }) => {
     try {
         // Decode and verify the token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log("Valid: ", decoded)
         return { user: decoded };
     } catch (err) {
         console.error('Invalid token:', err);

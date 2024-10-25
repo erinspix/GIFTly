@@ -2,6 +2,8 @@
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 const User = require('../models/User');
 const Product = require('../models/Product');
 
@@ -9,6 +11,7 @@ const resolvers = {
     Query: {
         // Fetch the authenticated user's data
         me: async (parent, args, context) => {
+            console.log("Context: ", context);
             if (!context.user) throw new Error('Not authenticated');
             return await User.findById(context.user._id).select('-password');
         },
@@ -35,11 +38,12 @@ const resolvers = {
 
             // Create the user (password hashing handled in model)
             const user = await User.create({ username, email, password });
-
+            console.log("New User: ", user);
             // Generate a JWT token
             const token = jwt.sign({ _id: user._id, email: user.email }, process.env.JWT_SECRET, {
                 expiresIn: '1h',
             });
+            console.log("New Token: ", token);
 
             return { token, user };
         },

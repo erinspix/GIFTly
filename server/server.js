@@ -4,6 +4,8 @@ const path = require('path');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const { authMiddleware } = require('./utils/auth');
+const dotenv = require('dotenv');
+dotenv.config();
 
 // Import the two parts of a GraphQL schema
 const { typeDefs, resolvers } = require('./schema');
@@ -23,6 +25,8 @@ const startApolloServer = async () => {
   
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
+
+  app.use('/images', express.static(path.join(__dirname, '../client/images')));
   
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware
