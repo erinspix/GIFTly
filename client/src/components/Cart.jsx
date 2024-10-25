@@ -59,13 +59,28 @@ const Cart = () => {
     }
 
     return (
-        <Box maxW="lg" mx="auto" mt={8} p={6} borderWidth={1} borderRadius="lg" boxShadow="lg">
+        <Box
+            maxW="lg"
+            mx="auto"
+            mt={8}
+            p={6}
+            borderWidth={1}
+            borderRadius="lg"
+            boxShadow="xl"
+            bg="rgba(255, 255, 255, 0.8)" // Frosted glass effect
+            backdropFilter="blur(4px)"
+        >
             <Heading mb={6} textAlign="center">Your Cart</Heading>
             <VStack spacing={4} align="stretch">
                 {cartItems.map((item) => (
                     <Box key={item._id} p={4} borderWidth={1} borderRadius="md" boxShadow="md">
                         <HStack spacing={4}>
-                            <Image src={`/assets/${item.imageUrl}`} alt={item.name} boxSize="80px" objectFit="cover" />
+                            <Image
+                                src={`/assets/${item.imageUrl}`}
+                                alt={item.name}
+                                boxSize="80px"
+                                objectFit="cover"
+                            />
                             <VStack align="start" spacing={1} flex="1">
                                 <Text fontWeight="bold" fontSize="lg">{item.name}</Text>
                                 <Text color="gray.600">${item.price.toFixed(2)}</Text>
@@ -93,7 +108,13 @@ const Cart = () => {
                     <Text fontWeight="bold" fontSize="lg">${calculateTotal()}</Text>
                 </HStack>
                 <HStack spacing={4} mt={4}>
-                    <Button colorScheme="teal" width="full" onClick={handleCheckout}>
+                    <Button
+                        colorScheme="blue"
+                        bg="#5DADE2"
+                        _hover={{ bg: "#3498DB" }}
+                        width="full"
+                        onClick={handleCheckout}
+                    >
                         Checkout
                     </Button>
                     <Button variant="outline" colorScheme="red" width="full" onClick={handleClearCart}>
