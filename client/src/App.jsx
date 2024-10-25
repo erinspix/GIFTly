@@ -1,39 +1,46 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom';
+// client/src/App.js
+
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Box } from '@chakra-ui/react';
+
 import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import Collection from './pages/Collection';
-import ItemDetail from './pages/ItemDetail';
-import Login from './pages/Login';
+import Register from './components/Register';
+import Login from './components/Login';
+import Profile from './components/Profile';
+import Products from './components/Products';
+import Cart from './components/Cart';
+import ProtectedRoute from './components/ProtectedRoute';
 
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink} from '@apollo/client'
+const App = () => {
+    return (
+        <Router>
+            <Navbar />
+            <Box p={4}>
+                <Routes>
+                    <Route path="/" element={<Products />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route
+                        path="/profile"
+                        element={
+                            <ProtectedRoute>
+                                <Profile />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/cart"
+                        element={
+                            <ProtectedRoute>
+                                <Cart />
+                            </ProtectedRoute>
+                        }
+                    />
+                </Routes>
+            </Box>
+        </Router>
+    );
+};
 
-import { AuthProvider } from './context/AuthContext';
-
-import './App.css'
-
-const httpLink = createHttpLink({ 
-  uri: '/graphql'
-});
-
-const client = new ApolloClient({
-  link: httpLink,
-  cache: new InMemoryCache(),
-})
-
-function App() {
-  const [user, setUser] = useState()
-
-  return (
-    <ApolloProvider client={client}>
-      <AuthProvider>
-        <Navbar />
-        <main className='wrapper'>
-          <Outlet />
-        </main>
-      </AuthProvider>
-    </ApolloProvider>
-  )
-}
-
-export default App
+export default App;

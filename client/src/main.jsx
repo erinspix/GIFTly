@@ -1,46 +1,19 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import Home from './pages/Home.jsx'
-import Collection from './pages/Collection.jsx'
-import Login from './pages/Login.jsx'
-import ItemDetail from './pages/ItemDetail.jsx'
+import React from 'react';
+import { createRoot } from 'react-dom/client'; // Fix createRoot import
+import App from './App';
+import { ApolloProvider } from '@apollo/client';
+import client from './apolloClient';
+import { ChakraProvider } from '@chakra-ui/react';
 
-import './index.css'
+const root = createRoot(document.getElementById('root'));
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  //  errorElement: <Error />
-    children: [
-      { 
-        index: true,
-        element: <Home />
-      },
-      { 
-        path: '/collection',
-        element: <Collection />
-      },
-      {
-        path: '/login',
-        element: <Login />
-      },
-      {
-        path: '/item/:id',
-        element: <ItemDetail />
-      }
-    ]
-  },
-]);
-
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
+root.render(
+  <React.StrictMode>
+  <ApolloProvider client={client}>
+      <ChakraProvider>
+          <App />
+      </ChakraProvider>
+  </ApolloProvider>
+</React.StrictMode>
 )
+
