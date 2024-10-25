@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-// Import the ApolloServer class
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const { authMiddleware } = require('./utils/auth');
@@ -10,6 +9,9 @@ dotenv.config();
 // Import the two parts of a GraphQL schema
 const { typeDefs, resolvers } = require('./schema');
 const db = require('./config/db');
+
+// Import Stripe
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
@@ -27,11 +29,29 @@ const startApolloServer = async () => {
   app.use(express.json());
 
   app.use('/images', express.static(path.join(__dirname, '../client/images')));
-  
+
+  // Add the Stripe PaymentIntent route
+  app.post('/api/create-payment-intent', async (req, res) => {
+    const { amount } = req.body;
+
+    try {
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount,
+        currency: 'usd', // Adjust currency as needed
+      });
+
+      res.json({ clientSecret: paymentIntent.client_secret });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // GraphQL middleware
   app.use('/graphql', expressMiddleware(server, {
-    context: authMiddleware
+    context: authMiddleware,
   }));
 
+  // Serve static assets in production
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/dist')));
 
