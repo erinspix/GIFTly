@@ -1,17 +1,17 @@
+require('dotenv').config(); // Load .env variables at the top
+
 const express = require('express');
 const path = require('path');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const { authMiddleware } = require('./utils/auth');
-const dotenv = require('dotenv');
-dotenv.config();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Initialize Stripe
 
-// Import the two parts of a GraphQL schema
+// Debugging line to check if Stripe key is loaded
+console.log('Stripe Secret Key:', process.env.STRIPE_SECRET_KEY);
+
 const { typeDefs, resolvers } = require('./schema');
 const db = require('./config/db');
-
-// Import Stripe
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
@@ -25,19 +25,21 @@ const app = express();
 const startApolloServer = async () => {
   await server.start();
   
+  // Middleware to parse URL-encoded and JSON request bodies
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
+  // Serve static images
   app.use('/images', express.static(path.join(__dirname, '../client/images')));
 
-  // Add the Stripe PaymentIntent route
+  // Stripe PaymentIntent route
   app.post('/api/create-payment-intent', async (req, res) => {
     const { amount } = req.body;
 
     try {
       const paymentIntent = await stripe.paymentIntents.create({
         amount,
-        currency: 'usd', // Adjust currency as needed
+        currency: 'usd',
       });
 
       res.json({ clientSecret: paymentIntent.client_secret });
@@ -60,6 +62,7 @@ const startApolloServer = async () => {
     });
   }
 
+  // Connect to the database and start the server
   db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
