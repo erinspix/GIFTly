@@ -11,7 +11,7 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        background: 'linear-gradient(to bottom, #ADD8E6, #F0F8FF)',
+        background: 'linear-gradient(to bottom, #AEDFF7, #D6EAF8)', // Softer blue tones
         fontFamily: "'Poppins', sans-serif",
       },
       h1: { color: '#0A3D62' },
@@ -23,6 +23,8 @@ const theme = extendTheme({
       button: {
         borderRadius: '8px',
         fontWeight: 'bold',
+        backgroundColor: '#AEDFF7', // Frosty blue
+        color: 'white',
       },
       input: {
         border: '1px solid #D3D3D3',
@@ -32,12 +34,31 @@ const theme = extendTheme({
   },
 });
 
+// Snowflakes Component
+const Snowflakes = () => {
+  const snowflakes = Array.from({ length: 50 }).map((_, i) => (
+    <div
+      key={i}
+      className="snowflake"
+      style={{
+        '--left': Math.random(),
+        '--size': `${Math.random() * 2 + 0.5}em`,
+      }}
+    >
+      ❄️
+    </div>
+  ));
+
+  return <div className="snow-container">{snowflakes}</div>;
+};
+
 const root = createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <ChakraProvider theme={theme}>
+        <Snowflakes />
         <App />
       </ChakraProvider>
     </ApolloProvider>

@@ -1,6 +1,5 @@
-/* global.css */
 body {
-    background: linear-gradient(to bottom, #ADD8E6, #F0F8FF);
+    background: linear-gradient(to bottom, #AEDFF7, #D6EAF8);
     font-family: 'Poppins', sans-serif;
     margin: 0;
 }
@@ -10,11 +9,50 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 button {
+    background-color: #AEDFF7; /* Frosty blue */
+    color: white;
     border-radius: 8px;
     font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #5DADE2; /* Icy blue */
 }
 
 input {
-    border: 1px solid #D3D3D3;
+    border: 1px solid #B0C4DE; /* Light steel blue */
     border-radius: 6px;
+}
+
+.cart-container, .login-container, .register-container {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+@keyframes snow {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    left: calc(100% * var(--left));
+    font-size: var(--size);
+    opacity: 0.8;
+    animation: snow 10s linear infinite;
+}
+
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
 }
