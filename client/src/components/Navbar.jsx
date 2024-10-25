@@ -15,7 +15,7 @@ import { getCart } from '../utils/cartUtils';
 
 const Navbar = () => {
     const { loading, error, data } = useQuery(ME_QUERY, {
-        fetchPolicy: 'network-only', 
+        fetchPolicy: 'network-only',
     });
     const navigate = useNavigate();
     const client = useApolloClient();
@@ -47,20 +47,23 @@ const Navbar = () => {
         setCartCount(0);
         
         await client.clearStore();
-        // await client.refetchQueries({
-        //     include: [ME_QUERY],
-        // });
-        
         window.location.reload();
     };
 
-    if (loading) return null; 
+    if (loading) return null;
 
     return (
-        <Flex bg="teal.500" p={4} color="white" alignItems="center">
+        <Flex bg="teal.600" p={4} color="white" alignItems="center" boxShadow="md">
             <Box>
                 <RouterLink to="/">
-                    <Button variant="ghost" color="white">Home</Button>
+                    <Button
+                        variant="ghost"
+                        color="white"
+                        fontWeight="bold"
+                        _hover={{ bg: 'teal.700' }}
+                    >
+                        Home
+                    </Button>
                 </RouterLink>
             </Box>
             <Spacer />
