@@ -23,7 +23,7 @@ const theme = extendTheme({
       button: {
         borderRadius: '8px',
         fontWeight: 'bold',
-        backgroundColor: '#AEDFF7', // Frosty blue
+        backgroundColor: '#AEDFF7',
         color: 'white',
       },
       input: {
@@ -34,15 +34,17 @@ const theme = extendTheme({
   },
 });
 
-// Snowflakes Component
+// Snowflakes Component with random delay and duration
 const Snowflakes = () => {
   const snowflakes = Array.from({ length: 50 }).map((_, i) => (
     <div
       key={i}
       className="snowflake"
       style={{
-        '--left': Math.random(),
-        '--size': `${Math.random() * 2 + 0.5}em`,
+        '--left': Math.random(), // Random horizontal position
+        '--size': `${Math.random() * 2 + 0.5}em`, // Random size
+        '--duration': `${Math.random() * 5 + 5}s`, // Random fall duration (5s to 10s)
+        '--delay': `${Math.random() * 5}s`, // Random delay before start (0s to 5s)
       }}
     >
       ❄️
