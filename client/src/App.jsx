@@ -9,6 +9,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import './styles/paymentForm.css'
 
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink} from '@apollo/client'
 
