@@ -1,45 +1,59 @@
-body {
-    background: linear-gradient(to bottom, #AEDFF7, #D6EAF8);
-    font-family: 'Poppins', sans-serif;
+/* General Reset and Global Styling */
+body, html {
     margin: 0;
-}
-
-h1, h2, h3, h4, h5, h6 {
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #AEDFF7, #D6EAF8); /* Soft blue gradient */
+  }
+  
+  /* Headings Styling */
+  h1, h2, h3, h4, h5, h6 {
     color: #0A3D62; /* Deep winter blue */
-}
-
-button {
-    background-color: #AEDFF7; /* Frosty blue */
-    color: white;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Button Styling */
+  button {
     border-radius: 8px;
     font-weight: bold;
+    background-color: #AEDFF7; /* Soft blue */
+    color: white;
     transition: background-color 0.3s;
-}
-
-button:hover {
+  }
+  
+  button:hover {
     background-color: #5DADE2; /* Icy blue */
-}
-
-input {
-    border: 1px solid #B0C4DE; /* Light steel blue */
+  }
+  
+  /* Input Styling */
+  input {
+    border: 1px solid #D3D3D3;
     border-radius: 6px;
-}
-
-.cart-container, .login-container, .register-container {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(4px);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-@keyframes snow {
+  }
+  
+  /* Product Box Styling */
+  .product-box {
+    background: linear-gradient(to bottom right, #FFD700, #FFEC8B); /* Soft gold gradient */
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .product-box:hover {
+    background: linear-gradient(to bottom right, #A9DFBF, #D4EFDF); /* Soft green gradient */
+    transform: scale(1.05);
+  }
+  
+  /* Snowflake Animation */
+  @keyframes snow {
     0% {
       transform: translateY(0);
       opacity: 1;
     }
     100% {
       transform: translateY(100vh);
-      opacity: 0.3; /* Fades out slightly while falling */
+      opacity: 0.3; /* Fade-out effect */
     }
   }
   
@@ -52,6 +66,7 @@ input {
     animation: snow var(--duration) linear var(--delay) infinite;
   }
   
+  /* Snow Container Styling */
   .snow-container {
     position: fixed;
     top: 0;
@@ -61,15 +76,5 @@ input {
     pointer-events: none;
     overflow: hidden;
     z-index: 9999;
-  }
-  
-  .product-box {
-    background: linear-gradient(to bottom right, #FFD700, #FFEC8B);
-    transition: all 0.3s;
-  }
-  
-  .product-box:hover {
-    background: linear-gradient(to bottom right, #A9DFBF, #D4EFDF);
-    transform: scale(1.05);
   }
   

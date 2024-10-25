@@ -13,19 +13,18 @@ import {
 } from '@chakra-ui/react';
 import { addToCart } from '../utils/cartUtils';
 import { useNavigate } from 'react-router-dom';
-
+import './snowflakes.css'; // Import CSS for snowflake styles
 
 const Products = () => {
     const { loading, error, data } = useQuery(PRODUCTS_QUERY);
     const { data: authData } = useQuery(ME_QUERY);
     const navigate = useNavigate();
 
-    // Generate snowflakes
+    // Snowflake Animation
     useEffect(() => {
         const createSnowflakes = () => {
             const snowContainer = document.querySelector('.snow-container');
             if (snowContainer) {
-                // Create 100 snowflakes
                 for (let i = 0; i < 100; i++) {
                     const snowflake = document.createElement('div');
                     snowflake.className = 'snowflake';
@@ -44,7 +43,7 @@ const Products = () => {
         return () => {
             const snowContainer = document.querySelector('.snow-container');
             if (snowContainer) {
-                snowContainer.innerHTML = ''; // Clear snowflakes on cleanup
+                snowContainer.innerHTML = ''; // Cleanup on component unmount
             }
         };
     }, []);
@@ -63,11 +62,25 @@ const Products = () => {
 
     return (
         <Box position="relative">
+            {/* Snowflake Container */}
             <div className="snow-container" />
-            <Heading mb={6} textAlign="center">Our Products</Heading>
+
+            <Heading mb={6} color="#0A3D62" textAlign="center">GIFTly</Heading>
             <Grid templateColumns="repeat(auto-fill, minmax(200px, 1fr))" gap={6}>
                 {data.products.map((product) => (
-                    <Box key={product._id} borderWidth="1px" borderRadius="lg" overflow="hidden" p={4}>
+                    <Box
+                        key={product._id}
+                        borderWidth="1px"
+                        borderRadius="lg"
+                        overflow="hidden"
+                        p={4}
+                        bg="linear-gradient(to bottom right, #FFD700, #FFEC8B)" // Soft gold gradient
+                        _hover={{
+                            bg: 'linear-gradient(to bottom right, #A9DFBF, #D4EFDF)', // Soft green hover
+                            transform: 'scale(1.05)',
+                        }}
+                        transition="all 0.3s"
+                    >
                         <Image
                             src={`/images/${product.imageUrl}`}
                             alt={product.name}
@@ -77,10 +90,12 @@ const Products = () => {
                         />
                         <Box mt={2}>
                             <VStack spacing={1} align="start">
-                                <Text fontWeight="bold" fontSize="lg">{product.name}</Text>
-                                <Text>${product.price.toFixed(2)}</Text>
-                                <Text>Craftsman: {product.craftsman}</Text>
-                                <Text>Location: {product.location}</Text>
+                                <Text fontWeight="bold" fontSize="lg" color="#0A3D62">
+                                    {product.name}
+                                </Text>
+                                <Text color="#0A3D62">${product.price.toFixed(2)}</Text>
+                                <Text color="gray.600">Craftsman: {product.craftsman}</Text>
+                                <Text color="gray.600">Location: {product.location}</Text>
                                 <Button
                                     mt={2}
                                     colorScheme="teal"
