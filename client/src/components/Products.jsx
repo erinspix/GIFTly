@@ -13,7 +13,6 @@ import {
 } from '@chakra-ui/react';
 import { addToCart } from '../utils/cartUtils';
 import { useNavigate } from 'react-router-dom';
-import '../../global.css'; // Adjust the path based on the actual location
 
 
 const Products = () => {
