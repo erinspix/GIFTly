@@ -63,3 +63,13 @@ input {
     z-index: 9999;
   }
   
+  .product-box {
+    background: linear-gradient(to bottom right, #FFD700, #FFEC8B);
+    transition: all 0.3s;
+  }
+  
+  .product-box:hover {
+    background: linear-gradient(to bottom right, #A9DFBF, #D4EFDF);
+    transform: scale(1.05);
+  }
+  

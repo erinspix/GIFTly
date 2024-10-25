@@ -34,8 +34,10 @@ const theme = extendTheme({
   },
 });
 
-// Snowflakes Component with random delay and duration
+// Snowflakes Component with random Christmas emoticons
 const Snowflakes = () => {
+  const emoticons = ['❄️', '🎄', '🎅', '🎁', '⛄']; // List of festive emoticons
+
   const snowflakes = Array.from({ length: 50 }).map((_, i) => (
     <div
       key={i}
@@ -47,7 +49,7 @@ const Snowflakes = () => {
         '--delay': `${Math.random() * 5}s`, // Random delay before start (0s to 5s)
       }}
     >
-      ❄️
+      {emoticons[Math.floor(Math.random() * emoticons.length)]} {/* Random emoticon */}
     </div>
   ));
 
