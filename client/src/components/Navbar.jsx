@@ -8,7 +8,6 @@ import {
     Spacer,
     Button,
     Text,
-    Link,
     Badge,
     Heading,
 } from '@chakra-ui/react';
@@ -73,10 +72,12 @@ const Navbar = () => {
             <Box>
                 <Heading
                     as="h1"
-                    size="lg"
+                    fontSize="3xl" // Larger font size
+                    fontWeight="extrabold" // Extra bold for more emphasis
                     color="white"
-                    fontWeight="bold"
                     textAlign="center"
+                    textShadow="2px 2px 4px rgba(0, 0, 0, 0.5)" // Drop shadow effect
+                    letterSpacing="wider" // Slightly wider letters for fun look
                 >
                     GIFTly
                 </Heading>
