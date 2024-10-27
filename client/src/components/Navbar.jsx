@@ -10,6 +10,7 @@ import {
     Text,
     Link,
     Badge,
+    Heading,
 } from '@chakra-ui/react';
 import { getCart } from '../utils/cartUtils';
 
@@ -56,14 +57,15 @@ const Navbar = () => {
         <Flex bg="teal.600" p={4} color="white" alignItems="center" boxShadow="md">
             <Box>
                 <RouterLink to="/">
-                    <Button
-                        variant="ghost"
+                    <Heading
+                        as="h1"
+                        size="lg"
                         color="white"
                         fontWeight="bold"
-                        _hover={{ bg: 'teal.700' }}
+                        _hover={{ color: 'teal.200' }}
                     >
-                        Home
-                    </Button>
+                        GIFTly
+                    </Heading>
                 </RouterLink>
             </Box>
             <Spacer />
