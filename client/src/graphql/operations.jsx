@@ -56,3 +56,17 @@ export const PRODUCTS_QUERY = gql`
         }
     }
 `;
+
+// Query to fetch a random product
+export const RANDOM_PRODUCT_QUERY = gql`
+  query GetRandomProduct {
+    randomProduct {
+      _id
+      name
+      price
+      craftsman
+      location
+      imageUrl
+    }
+  }
+`;
