@@ -1,5 +1,5 @@
 require('dotenv').config(); // Load .env variables at the top
-
+console.log('Stripe Secret Key:', process.env.STRIPE_SECRET_KEY);
 const express = require('express');
 const path = require('path');
 const { ApolloServer } = require('@apollo/server');
@@ -8,7 +8,7 @@ const { authMiddleware } = require('./utils/auth');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Initialize Stripe
 
 // Debugging line to check if Stripe key is loaded
-console.log('Stripe Secret Key:', process.env.STRIPE_SECRET_KEY);
+
 
 const { typeDefs, resolvers } = require('./schema');
 const db = require('./config/db');
