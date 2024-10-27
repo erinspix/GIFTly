@@ -54,21 +54,35 @@ const Navbar = () => {
     if (loading) return null;
 
     return (
-        <Flex bg="teal.600" p={4} color="white" alignItems="center" boxShadow="md">
+        <Flex bg="#0A3D62" p={4} color="white" alignItems="center" boxShadow="md">
+            {/* Home Button */}
             <Box>
                 <RouterLink to="/">
-                    <Heading
-                        as="h1"
-                        size="lg"
+                    <Button
+                        variant="ghost"
                         color="white"
                         fontWeight="bold"
-                        _hover={{ color: 'teal.200' }}
+                        _hover={{ bg: '#0A2A4D' }}
                     >
-                        GIFTly
-                    </Heading>
+                        Home
+                    </Button>
                 </RouterLink>
             </Box>
+            {/* Centered GIFTly Title */}
             <Spacer />
+            <Box>
+                <Heading
+                    as="h1"
+                    size="lg"
+                    color="white"
+                    fontWeight="bold"
+                    textAlign="center"
+                >
+                    GIFTly
+                </Heading>
+            </Box>
+            <Spacer />
+            {/* User Info and Auth Links */}
             <Box>
                 {data && data.me ? (
                     <Flex alignItems="center">
