@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useQuery, useApolloClient } from '@apollo/client';
-import { ME_QUERY } from '../graphql/operations';
+import { useQuery, useApolloClient, useLazyQuery } from '@apollo/client';
+import { ME_QUERY, RANDOM_PRODUCT_QUERY } from '../graphql/operations';
 import {
     Box,
     Flex,
@@ -22,13 +22,14 @@ const Navbar = () => {
     const client = useApolloClient();
     const [cartCount, setCartCount] = useState(0);
 
+    const [fetchRandomProduct, { data: randomProductData }] = useLazyQuery(RANDOM_PRODUCT_QUERY);
+
     useEffect(() => {
         const cart = getCart();
         const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
         setCartCount(totalItems);
     }, []);
 
-    // Update cart count whenever the cart changes
     useEffect(() => {
         const handleStorageChange = () => {
             const cart = getCart();
@@ -51,10 +52,17 @@ const Navbar = () => {
         window.location.reload();
     };
 
-    // Navigate to "Surprise Me" page (adjust as needed)
-    const handleSurpriseMe = () => {
-        navigate('/surprise'); // Update this route if needed
+    const handleSurpriseMe = async () => {
+        // Trigger the query to fetch a random product
+        fetchRandomProduct();
     };
+
+    // Navigate to the product detail page when random product is fetched
+    useEffect(() => {
+        if (randomProductData?.randomProduct) {
+            navigate(`/product/${randomProductData.randomProduct._id}`);
+        }
+    }, [randomProductData, navigate]);
 
     if (loading) return null;
 
@@ -79,9 +87,9 @@ const Navbar = () => {
                 <Button
                     variant="solid"
                     color="white"
-                    bg="#5DADE2" // Icy blue
+                    bg="#5DADE2"
                     fontWeight="bold"
-                    _hover={{ bg: '#3498DB' }} // Deeper blue on hover
+                    _hover={{ bg: '#3498DB' }}
                     onClick={handleSurpriseMe}
                 >
                     Surprise Me
