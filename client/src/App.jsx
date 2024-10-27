@@ -1,8 +1,6 @@
-// client/src/App.js
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Box } from '@chakra-ui/react';
+import { Box, Image } from '@chakra-ui/react';
 
 import Navbar from './components/Navbar';
 import Register from './components/Register';
@@ -16,6 +14,15 @@ const App = () => {
     return (
         <Router>
             <Navbar />
+            {/* GIF Below Navbar */}
+            <Box display="flex" justifyContent="center" mt={2}>
+                <Image
+                    src="./assets/giftlygif.gif" // Replace with your actual GIF path
+                    alt="Giftly Gif"
+                    maxH="200px" // Adjust the height as needed
+                />
+            </Box>
+            {/* Main content */}
             <Box p={4}>
                 <Routes>
                     <Route path="/" element={<Products />} />
