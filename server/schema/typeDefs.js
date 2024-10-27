@@ -6,7 +6,6 @@ const typeDefs = gql`
         username: String!
         email: String!
         createdAt: String!
-        # Add fields like cart or orders if needed
     }
 
     type Product {
@@ -29,12 +28,12 @@ const typeDefs = gql`
         users: [User]
         products: [Product]
         product(id: ID!): Product
+        randomProduct: Product # New query for a random product
     }
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
-        # Additional mutations like addToCart, removeFromCart can be added
     }
 `;
 
