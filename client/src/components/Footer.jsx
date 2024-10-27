@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Text, Image } from '@chakra-ui/react';
-import gifImage from './giftlygif.gif'; // Adjust with the actual file name
+import gifImage from 'giftlygif.gif'; 
 
 const Footer = () => {
     return (
