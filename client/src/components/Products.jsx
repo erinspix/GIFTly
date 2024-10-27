@@ -65,7 +65,7 @@ const Products = () => {
             {/* Snowflake Container */}
             <div className="snow-container" />
 
-            <Heading mb={6} color="#0A3D62" textAlign="center">GIFTly</Heading>
+            {/* <Heading mb={6} color="#0A3D62" textAlign="center">GIFTly</Heading> */}
             <Grid templateColumns="repeat(auto-fill, minmax(200px, 1fr))" gap={6}>
                 {data.products.map((product) => (
                     <Box
