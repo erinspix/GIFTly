@@ -51,24 +51,60 @@ const Navbar = () => {
         window.location.reload();
     };
 
+    // Navigate to "Surprise Me" page (adjust as needed)
+    const handleSurpriseMe = () => {
+        navigate('/surprise'); // Update this route if needed
+    };
+
     if (loading) return null;
 
     return (
-        <Flex bg="teal.600" p={4} color="white" alignItems="center" boxShadow="md">
+        <Flex bg="#0A3D62" p={4} color="white" alignItems="center" boxShadow="md">
+            {/* Home Button */}
             <Box>
                 <RouterLink to="/">
-                    <Heading
-                        as="h1"
-                        size="lg"
+                    <Button
+                        variant="ghost"
                         color="white"
                         fontWeight="bold"
-                        _hover={{ color: 'teal.200' }}
+                        _hover={{ bg: '#0A2A4D' }}
                     >
-                        GIFTly
-                    </Heading>
+                        Home
+                    </Button>
                 </RouterLink>
             </Box>
+
+            {/* Surprise Me Button */}
+            <Box ml={2}>
+                <Button
+                    variant="solid"
+                    color="white"
+                    bg="#5DADE2" // Icy blue
+                    fontWeight="bold"
+                    _hover={{ bg: '#3498DB' }} // Deeper blue on hover
+                    onClick={handleSurpriseMe}
+                >
+                    Surprise Me
+                </Button>
+            </Box>
+
+            {/* Centered GIFTly Title */}
             <Spacer />
+            <Box>
+                <Heading
+                    as="h1"
+                    size="lg"
+                    color="white"
+                    fontWeight="bold"
+                    textAlign="center"
+                    textShadow="2px 2px 4px rgba(0, 0, 0, 0.5)"
+                >
+                    GIFTly
+                </Heading>
+            </Box>
+            <Spacer />
+
+            {/* User Info and Auth Links */}
             <Box>
                 {data && data.me ? (
                     <Flex alignItems="center">
