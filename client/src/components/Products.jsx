@@ -6,7 +6,6 @@ import {
     Grid,
     Image,
     Text,
-    Heading,
     Spinner,
     Button,
     VStack,
@@ -79,18 +78,18 @@ const Products = () => {
         }
     };
 
-    // Limit to 12 products for a 3x4 grid
+    // Limit to 12 products for a 4x3 grid
     const displayedProducts = data.products.slice(0, 12);
 
     return (
-        <Box position="relative">
+        <Box position="relative" px={8} py={4}>
             {/* Snowflake Container */}
             <div className="snow-container" />
 
             {/* Products Grid */}
             <Grid
-                templateColumns="repeat(3, 1fr)" // Set 3 columns
-                templateRows="repeat(4, auto)" // Set 4 rows
+                templateColumns="repeat(4, 1fr)" // Set 4 columns
+                templateRows="repeat(3, auto)" // Set 3 rows
                 gap={6}
             >
                 {displayedProducts.map((product) => (

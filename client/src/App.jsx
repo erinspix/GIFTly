@@ -17,7 +17,7 @@ const App = () => {
             {/* GIF Below Navbar */}
             <Box display="flex" justifyContent="center" mt={2}>
                 <Image
-                    src="./assets/giftlygif.gif" // Replace with your actual GIF path
+                    src="../gigtlygif.gif" // Replace with your actual GIF path
                     alt="Giftly Gif"
                     maxH="200px" // Adjust the height as needed
                 />
