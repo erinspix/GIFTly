@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 
 import Navbar from './components/Navbar';
-import Footer from './components/Footer'; // Import Footer
+import Footer from './components/Footer';
 import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
@@ -15,6 +15,19 @@ const App = () => {
     return (
         <Router>
             <Navbar />
+            
+            {/* Tagline */}
+            <Box 
+                bg="#5DADE2" 
+                color="white" 
+                py={3} 
+                textAlign="center" 
+                boxShadow="sm"
+            >
+                <Text fontSize="lg" fontWeight="bold" fontFamily="Poppins, sans-serif">
+                    Unique Handmade Gifts from Around the World, at Your Fingertips
+                </Text>
+            </Box>
             
             {/* Main content */}
             <Box p={4} px={8}>
@@ -41,7 +54,6 @@ const App = () => {
                 </Routes>
             </Box>
             
-            {/* Footer */}
             <Footer />
         </Router>
     );
