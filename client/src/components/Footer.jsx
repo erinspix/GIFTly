@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Text, Image } from '@chakra-ui/react';
-import gifImage from './giftlygif.gif'; // Adjust to the actual file name and path
+import { Box, Text } from '@chakra-ui/react';
 
 const Footer = () => {
     return (
@@ -12,14 +11,17 @@ const Footer = () => {
             mt={8}
             textAlign="center"
         >
-            {/* GIF */}
-            <Box display="flex" justifyContent="center" mb={4}>
-                <Image
-                    src={gifImage} // Use the imported GIF
-                    alt="Fun GIF"
-                    maxH="200px"
-                />
-            </Box>
+            {/* GIF Background */}
+            <Box
+                display="flex"
+                justifyContent="center"
+                mb={4}
+                height="200px"
+                backgroundImage="url('./public/giftlyDarkBlue.gif')" // Public path
+                backgroundRepeat="no-repeat"
+                backgroundPosition="center"
+                backgroundSize="contain"
+            />
 
             {/* Footer Text */}
             <Text fontSize="sm">
