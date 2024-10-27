@@ -1,13 +1,86 @@
+/* General Body Styling */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background-color: #B3E5FC; /* Light blue background for winter feel */
+  color: #0A3D62; /* Deep winter blue text */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s, color 0.3s;
 }
 
+/* Fun Heading Styling */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  color: #0A3D62; /* Deep winter blue */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Subtle drop shadow */
+}
+
+/* Code Block Styling */
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  background-color: #D1F2EB; /* Soft teal background */
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #0A3D62; /* Deep winter blue text */
+}
+
+/* Button Styling */
+button {
+  font-family: 'Poppins', sans-serif;
+  background-color: #5DADE2; /* Icy blue */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+  background-color: #3498DB; /* Deeper icy blue */
+  transform: translateY(-2px); /* Fun lift effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: translateY(1px); /* Pressed effect */
+}
+
+/* Fun Container for Snowflakes */
+.snowflake {
+  color: #ADD8E6; /* Light blue for snowflakes */
+  animation: snow 15s linear infinite;
+  font-size: 1.5em; /* Slightly larger for a playful effect */
+  user-select: none; /* Prevent selecting snowflakes */
+}
+
+/* Snowfall Animation */
+@keyframes snow {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0.3;
+  }
+}
+
+/* Box Styling for Fun */
+.product-box {
+  background: #FFFDE7; /* Light cream */
+  border: 2px solid #AEDFF7; /* Soft blue */
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.product-box:hover {
+  background: #D1F2EB; /* Light teal on hover */
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
