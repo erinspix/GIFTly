@@ -8,6 +8,7 @@ import {
     Spacer,
     Button,
     Text,
+    Link,
     Badge,
     Heading,
 } from '@chakra-ui/react';
@@ -50,6 +51,11 @@ const Navbar = () => {
         window.location.reload();
     };
 
+    // Navigate to "Surprise Me" page (adjust as needed)
+    const handleSurpriseMe = () => {
+        navigate('/surprise'); // Update this route if needed
+    };
+
     if (loading) return null;
 
     return (
@@ -67,22 +73,37 @@ const Navbar = () => {
                     </Button>
                 </RouterLink>
             </Box>
+
+            {/* Surprise Me Button */}
+            <Box ml={2}>
+                <Button
+                    variant="solid"
+                    color="white"
+                    bg="#5DADE2" // Icy blue
+                    fontWeight="bold"
+                    _hover={{ bg: '#3498DB' }} // Deeper blue on hover
+                    onClick={handleSurpriseMe}
+                >
+                    Surprise Me
+                </Button>
+            </Box>
+
             {/* Centered GIFTly Title */}
             <Spacer />
             <Box>
                 <Heading
                     as="h1"
-                    fontSize="3xl" // Larger font size
-                    fontWeight="extrabold" // Extra bold for more emphasis
+                    size="lg"
                     color="white"
+                    fontWeight="bold"
                     textAlign="center"
-                    textShadow="2px 2px 4px rgba(0, 0, 0, 0.5)" // Drop shadow effect
-                    letterSpacing="wider" // Slightly wider letters for fun look
+                    textShadow="2px 2px 4px rgba(0, 0, 0, 0.5)"
                 >
                     GIFTly
                 </Heading>
             </Box>
             <Spacer />
+
             {/* User Info and Auth Links */}
             <Box>
                 {data && data.me ? (
