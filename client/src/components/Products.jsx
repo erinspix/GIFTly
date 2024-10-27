@@ -22,28 +22,47 @@ const Products = () => {
 
     // Snowflake Animation
     useEffect(() => {
-        const createSnowflakes = () => {
-            const snowContainer = document.querySelector('.snow-container');
-            if (snowContainer) {
-                for (let i = 0; i < 100; i++) {
-                    const snowflake = document.createElement('div');
-                    snowflake.className = 'snowflake';
-                    snowflake.style.setProperty('--left', Math.random());
-                    snowflake.style.setProperty('--size', `${Math.random() * 10 + 5}px`);
-                    snowflake.style.setProperty('--duration', `${Math.random() * 5 + 5}s`);
-                    snowflake.style.setProperty('--delay', `${Math.random() * 5}s`);
-                    snowflake.textContent = '❄';
-                    snowContainer.appendChild(snowflake);
-                }
-            }
+        const snowContainer = document.querySelector('.snow-container');
+
+        // Create a single snowflake
+        const createSnowflake = () => {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+
+            // Set random properties for each snowflake
+            const size = Math.random() * 10 + 5; // Size between 5px and 15px
+            const left = Math.random(); // Random horizontal position
+            const duration = Math.random() * 15 + 10; // Duration between 10s and 25s
+            const delay = Math.random() * 5 + 3; // Delay between 3s and 8s
+
+            // Set CSS variables
+            snowflake.style.setProperty('--size', `${size}px`);
+            snowflake.style.setProperty('--left', left);
+            snowflake.style.setProperty('--duration', `${duration}s`);
+            snowflake.style.setProperty('--delay', `${delay}s`);
+
+            // Snowflake symbol
+            snowflake.textContent = '❄️';
+            snowContainer.appendChild(snowflake);
+
+            // Remove the snowflake after it finishes falling
+            setTimeout(() => {
+                snowflake.remove();
+            }, (duration + delay) * 1000);
         };
 
-        createSnowflakes();
+        // Create snowflakes at random intervals
+        const interval = setInterval(() => {
+            if (Math.random() < 0.2) { // 20% chance to create a snowflake per interval
+                createSnowflake();
+            }
+        }, 500); // Check every 500ms
 
+        // Cleanup function on component unmount
         return () => {
-            const snowContainer = document.querySelector('.snow-container');
+            clearInterval(interval);
             if (snowContainer) {
-                snowContainer.innerHTML = ''; // Cleanup on component unmount
+                snowContainer.innerHTML = ''; // Clear snowflakes
             }
         };
     }, []);
@@ -65,7 +84,7 @@ const Products = () => {
             {/* Snowflake Container */}
             <div className="snow-container" />
 
-            {/* <Heading mb={6} color="#0A3D62" textAlign="center">GIFTly</Heading> */}
+            {/* Products Grid */}
             <Grid templateColumns="repeat(auto-fill, minmax(200px, 1fr))" gap={6}>
                 {data.products.map((product) => (
                     <Box
