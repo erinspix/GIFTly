@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Text, Image } from '@chakra-ui/react';
-import gifImage from 'giftlygif.gif'; 
+import gifImage from './giftlygif.gif'; // Adjust to the actual file name and path
 
 const Footer = () => {
     return (
@@ -11,14 +11,13 @@ const Footer = () => {
             py={4}
             mt={8}
             textAlign="center"
-            position="relative"
         >
             {/* GIF */}
             <Box display="flex" justifyContent="center" mb={4}>
                 <Image
-                    src="giftlygif.gif" // Replace with your actual GIF path
+                    src={gifImage} // Use the imported GIF
                     alt="Fun GIF"
-                    maxH="200px" // Adjust the height as needed
+                    maxH="200px"
                 />
             </Box>
 
