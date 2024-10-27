@@ -79,14 +79,21 @@ const Products = () => {
         }
     };
 
+    // Limit to 12 products for a 3x4 grid
+    const displayedProducts = data.products.slice(0, 12);
+
     return (
         <Box position="relative">
             {/* Snowflake Container */}
             <div className="snow-container" />
 
             {/* Products Grid */}
-            <Grid templateColumns="repeat(auto-fill, minmax(200px, 1fr))" gap={6}>
-                {data.products.map((product) => (
+            <Grid
+                templateColumns="repeat(3, 1fr)" // Set 3 columns
+                templateRows="repeat(4, auto)" // Set 4 rows
+                gap={6}
+            >
+                {displayedProducts.map((product) => (
                     <Box
                         key={product._id}
                         borderWidth="1px"
