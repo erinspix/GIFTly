@@ -68,7 +68,7 @@ const Cart = () => {
             borderWidth={1}
             borderRadius="lg"
             boxShadow="xl"
-            bg="white" // Removed the frosted glass effect
+            bg="white"
         >
             <Heading mb={6} textAlign="center">Your Cart</Heading>
             <VStack spacing={4} align="stretch">
@@ -77,7 +77,7 @@ const Cart = () => {
                         <HStack spacing={4}>
                             <Image
                                 src="./default-image.png" // Always use the default image
-                                alt={item.name}
+                                alt="Product Image"
                                 boxSize="80px"
                                 objectFit="cover"
                             />

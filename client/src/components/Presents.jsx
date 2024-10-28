@@ -11,12 +11,13 @@ const Presents = () => {
                 left: Math.random(),
                 size: `${Math.random() * 2 + 0.5}rem`,
                 duration: `${Math.random() * 5 + 5}s`,
-                delay: `${Math.random() * 2}s`,
+                delay: `${Math.random() * 5}s`, // More varied delay
                 symbol: Math.random() > 0.5 ? '🎁' : '🎄',
             };
 
             setFallingItems((prevItems) => [...prevItems, newItem]);
 
+            // Remove the item after it reaches the bottom
             setTimeout(() => {
                 setFallingItems((prevItems) =>
                     prevItems.filter((item) => item.id !== newItem.id)
@@ -24,7 +25,7 @@ const Presents = () => {
             }, 10000);
         };
 
-        const intervalId = setInterval(createFallingItem, 200);
+        const intervalId = setInterval(createFallingItem, 300);
 
         return () => clearInterval(intervalId);
     }, []);
