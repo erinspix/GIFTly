@@ -14,7 +14,7 @@ import {
 import { getCart } from '../utils/cartUtils';
 
 const Navbar = () => {
-    const { loading, error, data } = useQuery(ME_QUERY, {
+    const { loading, data } = useQuery(ME_QUERY, {
         fetchPolicy: 'network-only',
     });
     const navigate = useNavigate();
@@ -45,7 +45,7 @@ const Navbar = () => {
         localStorage.removeItem('id_token');
         localStorage.removeItem('cart');
         setCartCount(0);
-        
+
         await client.clearStore();
         window.location.reload();
     };
@@ -53,49 +53,68 @@ const Navbar = () => {
     if (loading) return null;
 
     return (
-        <Flex bg="#0A3D62" p={4} color="white" alignItems="center" boxShadow="md">
-            {/* Home Button */}
-            <Box>
-                <RouterLink to="/">
-                    <Button variant="ghost" color="white" fontWeight="bold">Home</Button>
-                </RouterLink>
-            </Box>
+        <Flex
+            direction="column"
+            align="center"
+            bg="#0A3D62"
+            p={4}
+            color="white"
+            boxShadow="md"
+        >
+            {/* Top section with buttons */}
+            <Flex w="100%" alignItems="center" maxW="1200px">
+                <Box>
+                    <RouterLink to="/">
+                        <Button variant="ghost" color="white" fontWeight="bold">Home</Button>
+                    </RouterLink>
+                </Box>
 
-            {/* Centered GIFTly Title */}
-            <Spacer />
-            <Box>
-                <Heading as="h1" size="lg" color="white" fontWeight="bold" textAlign="center">
-                    GIFTly
-                </Heading>
-            </Box>
-            <Spacer />
+                <Spacer />
+                <Box>
+                    <Heading as="h1" size="lg" color="white" fontWeight="bold">
+                        GIFTly
+                    </Heading>
+                </Box>
+                <Spacer />
 
-            {/* Login/Register or User Info */}
-            <Box>
-                {data && data.me ? (
-                    <Flex alignItems="center">
-                        <Text mr={4}>Hello, {data.me.username}</Text>
-                        <RouterLink to="/cart">
-                            <Button variant="ghost" color="white" mr={4}>
-                                Cart <Badge ml="1" colorScheme="red">{cartCount}</Badge>
-                            </Button>
-                        </RouterLink>
-                        <RouterLink to="/profile">
-                            <Button variant="ghost" color="white" mr={4}>Profile</Button>
-                        </RouterLink>
-                        <Button colorScheme="teal" onClick={handleLogout}>Logout</Button>
-                    </Flex>
-                ) : (
-                    <Flex>
-                        <RouterLink to="/login">
-                            <Button variant="ghost" color="white" mr={4}>Login</Button>
-                        </RouterLink>
-                        <RouterLink to="/register">
-                            <Button colorScheme="teal">Register</Button>
-                        </RouterLink>
-                    </Flex>
-                )}
-            </Box>
+                {/* Login/Register or User Info */}
+                <Box>
+                    {data && data.me ? (
+                        <Flex alignItems="center">
+                            <Text mr={4}>Hello, {data.me.username}</Text>
+                            <RouterLink to="/cart">
+                                <Button variant="ghost" color="white" mr={4}>
+                                    Cart <Badge ml="1" colorScheme="red">{cartCount}</Badge>
+                                </Button>
+                            </RouterLink>
+                            <RouterLink to="/profile">
+                                <Button variant="ghost" color="white" mr={4}>Profile</Button>
+                            </RouterLink>
+                            <Button colorScheme="teal" onClick={handleLogout}>Logout</Button>
+                        </Flex>
+                    ) : (
+                        <Flex>
+                            <RouterLink to="/login">
+                                <Button variant="ghost" color="white" mr={4}>Login</Button>
+                            </RouterLink>
+                            <RouterLink to="/register">
+                                <Button colorScheme="teal">Register</Button>
+                            </RouterLink>
+                        </Flex>
+                    )}
+                </Box>
+            </Flex>
+
+            {/* Tagline below GIFTly title */}
+            <Text
+                mt={2}
+                fontSize="lg"
+                fontWeight="bold"
+                fontFamily="Poppins, sans-serif"
+                textAlign="center"
+            >
+                Unique Handmade Gifts from Around the World, at Your Fingertips
+            </Text>
         </Flex>
     );
 };

@@ -13,6 +13,7 @@ import {
 import { getCart, removeFromCart, updateQuantity, clearCart } from '../utils/cartUtils';
 import { useNavigate } from 'react-router-dom';
 import Presents from './Presents';
+
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const navigate = useNavigate();
@@ -67,8 +68,7 @@ const Cart = () => {
             borderWidth={1}
             borderRadius="lg"
             boxShadow="xl"
-            bg="rgba(255, 255, 255, 0.8)" // Frosted glass effect
-            backdropFilter="blur(4px)"
+            bg="white" // Removed the frosted glass effect
         >
             <Heading mb={6} textAlign="center">Your Cart</Heading>
             <VStack spacing={4} align="stretch">
@@ -122,6 +122,7 @@ const Cart = () => {
                     </Button>
                 </HStack>
             </VStack>
+            <Presents /> {/* Add the Presents component */}
         </Box>
     );
 };
