@@ -53,10 +53,11 @@ const Navbar = () => {
     };
 
     const handleSurpriseMe = async () => {
-        // Trigger the query to fetch a random product
-        fetchRandomProduct();
+        console.log("Fetching a random product...");
+        fetchRandomProduct(); // Fetch random product
+        navigate('/surprise'); // Navigate to the SurpriseMe component
     };
-
+    
     // Navigate to the product detail page when random product is fetched
     useEffect(() => {
         if (randomProductData?.randomProduct) {

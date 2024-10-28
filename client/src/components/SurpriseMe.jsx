@@ -12,47 +12,52 @@ const SurpriseMe = () => {
     const [fetchRandomProduct, { data, loading, error }] = useLazyQuery(RANDOM_PRODUCT_QUERY, {
         fetchPolicy: 'network-only',
         onCompleted: (data) => {
+            console.log("Step 3: onCompleted callback triggered.");
             console.log("Data received from GraphQL:", data);
+
             if (data?.randomProduct) {
+                console.log("Step 4: Setting random product to state.");
                 setProduct(data.randomProduct);
             } else {
-                console.log("No product found in the response.");
+                console.log("Step 4.1: No product found in response.");
             }
         },
         onError: (err) => {
-            console.error("GraphQL Error:", err);
+            console.error("Step 3.1: GraphQL Error occurred:", err.message);
+            if (err.message.includes('canceled')) {
+                console.log("Step 3.2: Fetch canceled, retrying...");
+                fetchRandomProduct();
+            }
         },
     });
 
     // Fetch a random product on component mount
     useEffect(() => {
-        console.log("Component mounted. Fetching random product...");
+        console.log("Step 1: Component mounted. Initiating fetch for random product...");
         fetchRandomProduct();
     }, [fetchRandomProduct]);
 
     // Display loading state
     if (loading) {
-        console.log("Loading random product...");
+        console.log("Step 2: Loading random product...");
         return <Spinner size="xl" />;
     }
 
-    // Display error state with retry logic
+    // Display error state
     if (error) {
-        console.error("Error fetching random product:", error.message);
-        if (error.message.includes('canceled')) {
-            console.log("Retrying fetch...");
-            fetchRandomProduct(); // Retry fetching the random product
-        }
+        console.error("Step 5: Error fetching random product:", error.message);
         return <Text color="red.500">Error fetching random product</Text>;
     }
 
     // If no product has been fetched yet
     if (!product) {
-        console.log("No product data to display.");
+        console.log("Step 6: No product data available yet.");
         return <Text>Fetching a surprise gift for you...</Text>;
     }
 
     // Render the product
+    console.log("Step 7: Rendering random product:", product);
+
     return (
         <Box textAlign="center" mt={8} px={8}>
             <Box
@@ -87,7 +92,7 @@ const SurpriseMe = () => {
                         mt={4}
                         colorScheme="teal"
                         onClick={() => {
-                            console.log("Navigating to home...");
+                            console.log("Step 8: Navigating to home...");
                             navigate('/');
                         }}
                     >
