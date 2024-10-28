@@ -64,6 +64,9 @@ const SurpriseMe = () => {
         return <Text>Fetching a surprise gift for you...</Text>;
     }
 
+    // Log the fetched product data
+    console.log("Random product fetched:", product);
+
     // Render the product
     return (
         <Box textAlign="center" mt={8} px={8}>
@@ -107,5 +110,5 @@ const SurpriseMe = () => {
         </Box>
     );
 };
-console.log("Random product fetched:", randomProduct);
+
 export default SurpriseMe;
