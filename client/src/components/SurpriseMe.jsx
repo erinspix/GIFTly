@@ -91,8 +91,8 @@ const SurpriseMe = () => {
         </Box>
     );
 };
-console.log("Total products count:", count);
-console.log("Selected random index:", randomIndex);
+// console.log("Total products count:", count);
+// console.log("Selected random index:", randomIndex);
 console.log("Random product fetched:", randomProduct);
 
 export default SurpriseMe;
