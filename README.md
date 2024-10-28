@@ -2,30 +2,26 @@
 # Gift Finder App README
 
 ## Overview
-Gift Finder is a web application designed to help users discover and manage gifts effortlessly. It features a user-friendly interface that allows users to search for gifts, manage their accounts, and view detailed information about each gift. The app includes multiple pages tailored to enhance the shopping experience, including a home page, user page, collection/cart page, gift detail page, and past orders/search results page.
+GIFTly is a web application designed to simplify gift shopping by helping users discover, organize, and manage gift ideas. The app offers an intuitive interface where users can browse gifts, manage their accounts, add gifts to their collection, and view details about each gift. Key pages include the home page, user page, collection/cart page, and gift detail.
 
 ## Table of Contents
-1. [Home/Search Page](#home-search-page)
+1. [Home Page](#home-page)
 2. [User Page](#user-page)
 3. [Collection/Cart Page](#collectioncart-page)
-4. [Gift Detail Page](#gift-detail-page)
-5. [Past Orders/Search Results Page](#past-orderssearch-results-page)
+4. [Content](#content)
+5. [Installation](#installation)
+6. [Images](#images)
+7. [Questions](#Questions)
+8. [Deployed-App](#Deployed-Application)
 
-## Home/Search Page
+## Home Page
 ### Purpose
-The main landing page for the app, allowing users to search for gifts and explore featured items.
+The main landing page, giving users access to their current gift collection and cart.
 
 ### Content
-- **Search Bar:** Located at the top for easy access.
-- **Featured Gifts:** A section showcasing popular or highlighted gifts.
-- **Surprise Me:** A button for random gift suggestions.
-- **Recent Collections:** Quick links to collections and the user's cart.
+Current Collection: Displays gifts the user has saved.
+Cart Preview: Shows a summary of items in the cart.
 
-### Features
-- Search functionality with filter options.
-- "Surprise Me" button to refresh gift suggestions.
-
----
 
 ## User Page
 ### Purpose
@@ -34,7 +30,6 @@ Consolidates user login, settings, and account management into a single interfac
 ### Content
 - **Login Form:** Displays when the user is not logged in.
 - **Profile Settings:** Includes options for updating user information.
-- **Password Management:** Allows users to change their passwords.
 - **Logout Option:** Available when the user is logged in.
 
 ### Features
@@ -55,44 +50,45 @@ Combines saved gifts and cart functionality into one organized page.
 - Manage cart items (update quantities, remove items).
 - Initiate checkout directly from this page.
 
----
-
-## Gift Detail Page
-### Purpose
-Provides comprehensive information about a specific gift.
-
-### Content
-- **Detailed Gift Info:** Includes name, description, price, craftsman, location, star rating, and tags.
-
-### Features
-- Options to add the gift to the cart, rate the gift, add it to the collection, or share it.
-
----
-
-## Past Orders/Search Results Page
-### Purpose
-Displays either the user's past orders or search results on a single page.
-
-### Content
-- **Past Orders:** If accessed from the past orders section, displays the user's purchase history.
-- **Search Results:** If accessed via a search query, presents the relevant search results with filter options.
-
-### Features
-- Sorting options available for both past orders and search results.
-
----
 
 ## Installation
 To set up the Gift Finder app locally, follow these steps:
 
 1. Clone the repository:
-   ```bash
-   git clone. 
+ git clone <https://github.com/erinspix/GIFTly.git>
+cd giftly
 
-   cd gift-finder
+npm install
+npm start
 
-   npm install
+The server will run at http://localhost:3001.
 
-   npm start
- 
+Verify the Application:
+Open a browser and visit http://localhost:3001 to ensure everything works correctly, including login, collection management, and cart functions.
 
+## Images
+![Home](./client/public/images/giftyHome.png)
+![Login](./client/public/images/giftlyLogin.png)
+![Profile](./client/public/images/giftlyProfile.png)
+![Register](./client/public/images/giftlyReg.png)
+![Cart](./client/public/images/giftlyCart.png)
+
+## Questions
+
+For any questions, please contact me with the information below:
+
+GitHub: [erin spix](https://github.com/erinspix)  
+Email: e.spix@yahoo.com
+
+GitHub: [kalen james](https://github.com/Ksjames22)  
+Email: Ksjames@radford.edu
+
+GitHub: [emily myhand](https://github.com/emangelic)  
+Email: ema.angelic@outlook.com
+
+GitHub: [lily ebadi](https://github.com/erinspix)  
+Email: lily.ebadi@example.com
+
+## Deployed Application
+You can find the live version of the app here: 
+[GIFTly](https://giftly-yg35.onrender.com)
