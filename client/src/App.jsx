@@ -10,13 +10,14 @@ import Products from './components/Products';
 import Cart from './components/Cart';
 import ProtectedRoute from './components/ProtectedRoute';
 import Snowfall from './components/Snowfall'; // Import the Snowfall component
+import Footer from './components/Footer'; // Import the Footer component
 
 const App = () => {
     return (
         <Router>
-            <Snowfall /> {/* Add the Snowfall component here */}
+            <Snowfall /> {/* Add the Snowfall component */}
             <Navbar />
-            <Box p={4}>
+            <Box p={4} minHeight="calc(100vh - 150px)"> {/* Ensure full height minus header/footer */}
                 <Routes>
                     <Route path="/" element={<Products />} />
                     <Route path="/register" element={<Register />} />
@@ -39,6 +40,7 @@ const App = () => {
                     />
                 </Routes>
             </Box>
+            <Footer /> {/* Add the Footer component here */}
         </Router>
     );
 };

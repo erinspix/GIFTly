@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { getCart, removeFromCart, updateQuantity, clearCart } from '../utils/cartUtils';
 import { useNavigate } from 'react-router-dom';
-
+import Presents from './Presents';
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const navigate = useNavigate();
@@ -76,13 +76,11 @@ const Cart = () => {
                     <Box key={item._id} p={4} borderWidth={1} borderRadius="md" boxShadow="md">
                         <HStack spacing={4}>
                             <Image
-                                src={item.imageUrl.startsWith('http') ? item.imageUrl : `/assets/${item.imageUrl}`}
+                                src="./default-image.png" // Always use the default image
                                 alt={item.name}
                                 boxSize="80px"
                                 objectFit="cover"
-                                fallbackSrc="/assets/default-image.png" // Fallback image
                             />
-
                             <VStack align="start" spacing={1} flex="1">
                                 <Text fontWeight="bold" fontSize="lg">{item.name}</Text>
                                 <Text color="gray.600">${item.price.toFixed(2)}</Text>

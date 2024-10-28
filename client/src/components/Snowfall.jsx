@@ -5,21 +5,31 @@ const Snowfall = () => {
     const [snowflakes, setSnowflakes] = useState([]);
 
     useEffect(() => {
-        const createSnowflakes = () => {
-            const flakes = [];
-            for (let i = 0; i < 50; i++) { // Adjust number of flakes as needed
-                flakes.push({
-                    id: i,
-                    left: Math.random(),
-                    size: `${Math.random() * 2 + 0.5}rem`, // Random size between 0.5rem to 2.5rem
-                    duration: `${Math.random() * 5 + 5}s`, // Duration between 5s and 10s
-                    delay: `${Math.random() * 5}s`, // Random delay
-                });
-            }
-            setSnowflakes(flakes);
+        const createSnowflake = () => {
+            // Create a new snowflake with random properties
+            const newFlake = {
+                id: Math.random(), // Unique ID
+                left: Math.random(), // Random horizontal position
+                size: `${Math.random() * 2 + 0.5}rem`, // Random size between 0.5rem to 2.5rem
+                duration: `${Math.random() * 5 + 5}s`, // Random duration between 5s to 10s
+                delay: '0s', // No initial delay for each snowflake
+            };
+
+            // Add the new snowflake to the list
+            setSnowflakes((prevFlakes) => [...prevFlakes, newFlake]);
+
+            // Remove the snowflake after it reaches the bottom
+            setTimeout(() => {
+                setSnowflakes((prevFlakes) =>
+                    prevFlakes.filter((flake) => flake.id !== newFlake.id)
+                );
+            }, 10000); // 10s lifespan, matching max duration
         };
 
-        createSnowflakes();
+        // Set an interval to continuously create snowflakes every 200ms
+        const intervalId = setInterval(createSnowflake, 200);
+
+        return () => clearInterval(intervalId); // Cleanup on unmount
     }, []);
 
     return (
