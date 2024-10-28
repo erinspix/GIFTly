@@ -17,7 +17,7 @@ const Footer = () => {
                 justifyContent="center"
                 mb={4}
                 height="200px"
-                backgroundImage={`url(${process.env.PUBLIC_URL}/giftlyDarkBlue.gif)`}
+                backgroundImage="url('/giftlyDarkBlue.gif')" // Direct path
                 backgroundRepeat="no-repeat"
                 backgroundPosition="center"
                 backgroundSize="contain"
