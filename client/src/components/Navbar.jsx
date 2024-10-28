@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useQuery, useApolloClient } from '@apollo/client';
-import { ME_QUERY } from '../graphql/operations';
+import { useQuery, useApolloClient, useLazyQuery } from '@apollo/client';
+import { ME_QUERY, RANDOM_PRODUCT_QUERY } from '../graphql/operations';
 import {
     Box,
     Flex,
@@ -21,6 +21,9 @@ const Navbar = () => {
     const navigate = useNavigate();
     const client = useApolloClient();
     const [cartCount, setCartCount] = useState(0);
+
+    // Use Lazy Query for random product fetching
+    const [fetchRandomProduct, { data: randomProductData, loading: randomLoading, error: randomError }] = useLazyQuery(RANDOM_PRODUCT_QUERY);
 
     useEffect(() => {
         const cart = getCart();
@@ -50,10 +53,24 @@ const Navbar = () => {
         window.location.reload();
     };
 
-    // Updated handleSurpriseMe to navigate to /surprise
-    const handleSurpriseMe = () => {
-        navigate('/surprise');
+    const handleSurpriseMe = async () => {
+        console.log("Fetching a random product...");
+        // Trigger the query to fetch a random product
+        fetchRandomProduct();
     };
+
+    // Check if random product data is returned
+    useEffect(() => {
+        if (randomProductData?.randomProduct) {
+            console.log("Random Product Fetched:", randomProductData.randomProduct);
+            // Navigate to product detail page when a random product is fetched
+            navigate(`/product/${randomProductData.randomProduct._id}`);
+        }
+    }, [randomProductData, navigate]);
+
+    // Debug loading or error states
+    if (randomLoading) console.log("Loading random product...");
+    if (randomError) console.error("Error fetching random product:", randomError);
 
     if (loading) return null;
 
@@ -81,7 +98,7 @@ const Navbar = () => {
                     bg="#5DADE2"
                     fontWeight="bold"
                     _hover={{ bg: '#3498DB' }}
-                    onClick={handleSurpriseMe} // Call the updated handleSurpriseMe
+                    onClick={handleSurpriseMe}
                 >
                     Surprise Me
                 </Button>
