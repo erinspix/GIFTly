@@ -1,62 +1,89 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Box, Text } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { ME_QUERY } from '../graphql/operations';
+import {
+    Box,
+    Flex,
+    Spacer,
+    Button,
+    Text,
+    Heading,
+    Spinner,
+} from '@chakra-ui/react';
 
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Register from './components/Register';
-import Login from './components/Login';
-import Profile from './components/Profile';
-import Products from './components/Products';
-import Cart from './components/Cart';
-import ProtectedRoute from './components/ProtectedRoute';
+const Navbar = () => {
+    const navigate = useNavigate();
+    
+    // Fetch user data to check authentication status
+    const { data: userData, loading: userLoading, error: userError } = useQuery(ME_QUERY, {
+        fetchPolicy: 'network-only',
+        onCompleted: (data) => {
+            console.log("User data fetched:", data);
+        },
+        onError: (err) => {
+            console.error("Error fetching user data:", err);
+        },
+    });
 
-const App = () => {
+    // If user data is still loading, show spinner
+    if (userLoading) return <Spinner size="lg" color="white" />;
+
     return (
-        <Router>
-            <Navbar />
-            
-            {/* Tagline */}
-            <Box 
-                bg="#5DADE2" 
-                color="white" 
-                py={3} 
-                textAlign="center" 
-                boxShadow="sm"
-            >
-                <Text fontSize="lg" fontWeight="bold" fontFamily="Poppins, sans-serif">
-                    Unique Handmade Gifts from Around the World, at Your Fingertips
-                </Text>
-            </Box>
-            
-            {/* Main content */}
-            <Box p={4} px={8}>
-                <Routes>
-                    <Route path="/" element={<Products />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route
-                        path="/profile"
-                        element={
-                            <ProtectedRoute>
-                                <Profile />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/cart"
-                        element={
-                            <ProtectedRoute>
-                                <Cart />
-                            </ProtectedRoute>
-                        }
-                    />
-                </Routes>
+        <Flex bg="#0A3D62" p={4} color="white" alignItems="center" boxShadow="md">
+            {/* Home Button */}
+            <Box>
+                <RouterLink to="/">
+                    <Button
+                        variant="ghost"
+                        color="white"
+                        fontWeight="bold"
+                        _hover={{ bg: '#0A2A4D' }}
+                    >
+                        Home
+                    </Button>
+                </RouterLink>
             </Box>
 
-            <Footer />
-        </Router>
+            {/* Centered GIFTly Title */}
+            <Spacer />
+            <Box>
+                <Heading as="h1" size="lg" color="white" fontWeight="bold" textAlign="center">
+                    GIFTly
+                </Heading>
+            </Box>
+            <Spacer />
+
+            {/* Login/Register or User Info */}
+            <Box>
+                {userError ? (
+                    <Text color="red.500">Error loading user data</Text>
+                ) : userData?.me ? (
+                    <Flex alignItems="center">
+                        <Text mr={4}>Hello, {userData.me.username}</Text>
+                        <Button colorScheme="teal" onClick={() => {
+                            console.log("Logging out...");
+                            localStorage.removeItem('id_token');
+                            window.location.reload();
+                        }}>
+                            Logout
+                        </Button>
+                    </Flex>
+                ) : (
+                    <Flex>
+                        <RouterLink to="/login">
+                            <Button variant="ghost" color="white" mr={4}>
+                                Login
+                            </Button>
+                        </RouterLink>
+                        <RouterLink to="/register">
+                            <Button colorScheme="teal">Register</Button>
+                        </RouterLink>
+                    </Flex>
+                )}
+            </Box>
+        </Flex>
     );
 };
 
-export default App;
+export default Navbar;
