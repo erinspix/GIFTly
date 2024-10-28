@@ -43,7 +43,11 @@ const Profile = () => {
 
                 <Box className="profile-info-box">
                     <Text className="profile-text">
-                        <span className="profile-highlight">Member Since:</span> {new Date(data.me.createdAt).toLocaleDateString()}
+                    <Text className="profile-text">
+    <span className="profile-highlight">Member Since:</span> 
+    "You've been part of our *'nice list'* since {new Date(data.me.createdAt).toLocaleDateString()}!"
+</Text>
+
                     </Text>
                 </Box>
             </VStack>
