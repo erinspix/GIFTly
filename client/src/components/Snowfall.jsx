@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import './snowflakes.css'; // Import your CSS
 
-const Snowfall = () => {
+const Presents = () => {
     const [fallingItems, setFallingItems] = useState([]);
 
     useEffect(() => {
+        // Function to create a new falling item
         const createFallingItem = () => {
             const newItem = {
                 id: Math.random(),
-                left: Math.random(), // Random horizontal position
-                size: `${Math.random() * 2 + 0.5}rem`, // Random size between 0.5rem and 2.5rem
-                duration: `${Math.random() * 5 + 5}s`, // Random duration between 5s and 10s
-                delay: `${Math.random() * 10}s`, // Random delay for staggered start
-                symbol: Math.random() > 0.5 ? '❄️' : '🎄', // Randomly choose a snowflake or tree
+                left: Math.random(),
+                size: `${Math.random() * 2 + 0.5}rem`,
+                duration: `${Math.random() * 5 + 5}s`,
+                delay: `${Math.random() * 5}s`, // Random delay for staggered start
+                symbol: Math.random() > 0.5 ? '🎁' : '🎄',
             };
 
-            // Add the new item to the list
             setFallingItems((prevItems) => [...prevItems, newItem]);
 
             // Remove the item after it reaches the bottom
@@ -26,8 +26,8 @@ const Snowfall = () => {
             }, 10000); // 10s lifespan, matching max duration
         };
 
-        // Set an interval to continuously create falling items every 300ms
-        const intervalId = setInterval(createFallingItem, 300);
+        // Interval to create falling items every 500ms for staggered effect
+        const intervalId = setInterval(createFallingItem, 500);
 
         return () => clearInterval(intervalId); // Cleanup on unmount
     }, []);
