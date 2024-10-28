@@ -22,8 +22,7 @@ const Navbar = () => {
     const client = useApolloClient();
     const [cartCount, setCartCount] = useState(0);
 
-    // Use Lazy Query for random product fetching
-    const [fetchRandomProduct, { data: randomProductData, loading: randomLoading, error: randomError }] = useLazyQuery(RANDOM_PRODUCT_QUERY);
+    const [fetchRandomProduct, { data: randomProductData }] = useLazyQuery(RANDOM_PRODUCT_QUERY);
 
     useEffect(() => {
         const cart = getCart();
@@ -54,23 +53,16 @@ const Navbar = () => {
     };
 
     const handleSurpriseMe = async () => {
-        console.log("Fetching a random product...");
         // Trigger the query to fetch a random product
         fetchRandomProduct();
     };
 
-    // Check if random product data is returned
+    // Navigate to the product detail page when random product is fetched
     useEffect(() => {
         if (randomProductData?.randomProduct) {
-            console.log("Random Product Fetched:", randomProductData.randomProduct);
-            // Navigate to product detail page when a random product is fetched
             navigate(`/product/${randomProductData.randomProduct._id}`);
         }
     }, [randomProductData, navigate]);
-
-    // Debug loading or error states
-    if (randomLoading) console.log("Loading random product...");
-    if (randomError) console.error("Error fetching random product:", randomError);
 
     if (loading) return null;
 
