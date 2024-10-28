@@ -10,10 +10,12 @@ import {
     Text,
     Heading,
     Badge,
+    IconButton,
 } from '@chakra-ui/react';
+import { FaSnowflake } from 'react-icons/fa'; // Import snowflake icon
 import { getCart } from '../utils/cartUtils';
 
-const Navbar = () => {
+const Navbar = ({ toggleSnowfall, isSnowing }) => {
     const { loading, data } = useQuery(ME_QUERY, {
         fetchPolicy: 'network-only',
     });
@@ -27,7 +29,6 @@ const Navbar = () => {
         setCartCount(totalItems);
     }, []);
 
-    // Update cart count whenever the cart changes
     useEffect(() => {
         const handleStorageChange = () => {
             const cart = getCart();
@@ -45,7 +46,6 @@ const Navbar = () => {
         localStorage.removeItem('id_token');
         localStorage.removeItem('cart');
         setCartCount(0);
-
         await client.clearStore();
         window.location.reload();
     };
@@ -53,27 +53,42 @@ const Navbar = () => {
     if (loading) return null;
 
     return (
-        <Box w="100%" position="relative">
-            {/* Top section with buttons */}
-            <Flex
-                w="100%"
-                alignItems="center"
-                bg="#0A3D62"
-                p={4}
-                color="white"
-                boxShadow="md"
-                justifyContent="space-between"
-            >
+        <Flex
+            direction="column"
+            align="center"
+            bg="#0A3D62"
+            p={4}
+            color="white"
+            boxShadow="md"
+            w="100%"
+        >
+            <Flex w="100%" alignItems="center" maxW="1200px">
                 <Box>
                     <RouterLink to="/">
                         <Button variant="ghost" color="white" fontWeight="bold">Home</Button>
                     </RouterLink>
                 </Box>
 
-                <Heading as="h1" size="lg" color="white" fontWeight="bold">
-                    GIFTly
-                </Heading>
+                <Spacer />
+                <Box>
+                    <Heading as="h1" size="lg" color="white" fontWeight="bold">
+                        GIFTly
+                    </Heading>
+                </Box>
+                <Spacer />
 
+                {/* Snowflake Toggle Button */}
+                <IconButton
+                    icon={<FaSnowflake />}
+                    aria-label="Toggle Snowfall"
+                    onClick={toggleSnowfall}
+                    size="sm"
+                    colorScheme={isSnowing ? 'blue' : 'gray'}
+                    variant="ghost"
+                    ml={2}
+                />
+
+                {/* Login/Register or User Info */}
                 <Box>
                     {data && data.me ? (
                         <Flex alignItems="center">
@@ -101,19 +116,20 @@ const Navbar = () => {
                 </Box>
             </Flex>
 
-            {/* Tagline with light blue background */}
-            <Box w="100%" bg="#5DADE2" py={2}>
-                <Text
-                    fontSize="lg"
-                    fontWeight="bold"
-                    fontFamily="Poppins, sans-serif"
-                    textAlign="center"
-                    color="white"
-                >
+            {/* Tagline below GIFTly title */}
+            <Box
+                mt={2}
+                p={2}
+                w="100%"
+                bg="#5DADE2"
+                textAlign="center"
+                color="white"
+            >
+                <Text fontSize="lg" fontWeight="bold" fontFamily="Poppins, sans-serif">
                     Unique Handmade Gifts from Around the World, at Your Fingertips
                 </Text>
             </Box>
-        </Box>
+        </Flex>
     );
 };
 
