@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useQuery, useApolloClient, useLazyQuery } from '@apollo/client';
-import { ME_QUERY, RANDOM_PRODUCT_QUERY } from '../graphql/operations';
+import { useLazyQuery } from '@apollo/client';
+import { RANDOM_PRODUCT_QUERY } from '../graphql/operations';
 import {
     Box,
     Flex,
@@ -11,65 +11,44 @@ import {
     Link,
     Badge,
     Heading,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalBody,
+    ModalCloseButton,
+    Image,
+    VStack,
+    useDisclosure,
+    Spinner,
 } from '@chakra-ui/react';
-import { getCart } from '../utils/cartUtils';
 
 const Navbar = () => {
-    const { loading, error, data } = useQuery(ME_QUERY, {
-        fetchPolicy: 'network-only',
-    });
     const navigate = useNavigate();
-    const client = useApolloClient();
-    const [cartCount, setCartCount] = useState(0);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [product, setProduct] = useState(null);
 
-    const [fetchRandomProduct, { data: randomProductData }] = useLazyQuery(RANDOM_PRODUCT_QUERY);
+    const [fetchRandomProduct, { data, loading, error }] = useLazyQuery(RANDOM_PRODUCT_QUERY, {
+        fetchPolicy: 'network-only',
+        onCompleted: (data) => {
+            if (data?.randomProduct) {
+                console.log("Random product fetched:", data.randomProduct);
+                setProduct(data.randomProduct);
+            }
+        },
+        onError: (err) => {
+            console.error("GraphQL Error:", err);
+        },
+    });
 
-    useEffect(() => {
-        const cart = getCart();
-        const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-        setCartCount(totalItems);
-    }, []);
-
-    useEffect(() => {
-        const handleStorageChange = () => {
-            const cart = getCart();
-            const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-            setCartCount(totalItems);
-        };
-
-        window.addEventListener('storage', handleStorageChange);
-        return () => {
-            window.removeEventListener('storage', handleStorageChange);
-        };
-    }, []);
-
-    const handleLogout = async () => {
-        localStorage.removeItem('id_token');
-        localStorage.removeItem('cart');
-        setCartCount(0);
-        
-        await client.clearStore();
-        window.location.reload();
-    };
-
-    const handleSurpriseMe = async () => {
-        console.log("Fetching a random product...");
+    const handleSurpriseMe = () => {
+        console.log("Opening Surprise Me modal...");
         fetchRandomProduct(); // Fetch random product
-        navigate('/surprise'); // Navigate to the SurpriseMe component
+        onOpen(); // Open the modal
     };
-    
-    // Navigate to the product detail page when random product is fetched
-    useEffect(() => {
-        if (randomProductData?.randomProduct) {
-            navigate(`/product/${randomProductData.randomProduct._id}`);
-        }
-    }, [randomProductData, navigate]);
-
-    if (loading) return null;
 
     return (
         <Flex bg="#0A3D62" p={4} color="white" alignItems="center" boxShadow="md">
-            {/* Home Button */}
             <Box>
                 <RouterLink to="/">
                     <Button
@@ -83,7 +62,6 @@ const Navbar = () => {
                 </RouterLink>
             </Box>
 
-            {/* Surprise Me Button */}
             <Box ml={2}>
                 <Button
                     variant="solid"
@@ -97,48 +75,46 @@ const Navbar = () => {
                 </Button>
             </Box>
 
-            {/* Centered GIFTly Title */}
             <Spacer />
             <Box>
-                <Heading
-                    as="h1"
-                    size="lg"
-                    color="white"
-                    fontWeight="bold"
-                    textAlign="center"
-                    textShadow="2px 2px 4px rgba(0, 0, 0, 0.5)"
-                >
+                <Heading as="h1" size="lg" color="white" fontWeight="bold" textAlign="center">
                     GIFTly
                 </Heading>
             </Box>
             <Spacer />
 
-            {/* User Info and Auth Links */}
-            <Box>
-                {data && data.me ? (
-                    <Flex alignItems="center">
-                        <Text mr={4}>Hello, {data.me.username}</Text>
-                        <RouterLink to="/cart">
-                            <Button variant="ghost" color="white" mr={4}>
-                                Cart <Badge ml="1" colorScheme="red">{cartCount}</Badge>
-                            </Button>
-                        </RouterLink>
-                        <RouterLink to="/profile">
-                            <Button variant="ghost" color="white" mr={4}>Profile</Button>
-                        </RouterLink>
-                        <Button colorScheme="teal" onClick={handleLogout}>Logout</Button>
-                    </Flex>
-                ) : (
-                    <Flex>
-                        <RouterLink to="/login">
-                            <Button variant="ghost" color="white" mr={4}>Login</Button>
-                        </RouterLink>
-                        <RouterLink to="/register">
-                            <Button colorScheme="teal">Register</Button>
-                        </RouterLink>
-                    </Flex>
-                )}
-            </Box>
+            <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Surprise Gift</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        {loading && <Spinner size="xl" />}
+                        {error && <Text color="red.500">Error fetching product</Text>}
+                        {product ? (
+                            <Box textAlign="center">
+                                <Image
+                                    src={product.imageUrl}
+                                    alt={product.name}
+                                    boxSize="150px"
+                                    objectFit="cover"
+                                    mx="auto"
+                                />
+                                <VStack spacing={1} align="start" mt={2}>
+                                    <Text fontWeight="bold" fontSize="lg" color="#0A3D62">
+                                        {product.name}
+                                    </Text>
+                                    <Text color="#0A3D62">${product.price.toFixed(2)}</Text>
+                                    <Text color="gray.600">Craftsman: {product.craftsman}</Text>
+                                    <Text color="gray.600">Location: {product.location}</Text>
+                                </VStack>
+                            </Box>
+                        ) : (
+                            <Text>No product found.</Text>
+                        )}
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
         </Flex>
     );
 };
