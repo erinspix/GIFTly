@@ -15,6 +15,7 @@ const SurpriseMe = () => {
             console.log("Data received from GraphQL:", data);
             if (data?.randomProduct) {
                 setProduct(data.randomProduct);
+                console.log("Product set:", data.randomProduct);
             } else {
                 console.log("No product found in the response.");
             }
@@ -38,7 +39,7 @@ const SurpriseMe = () => {
 
     // Display error state
     if (error) {
-        console.error("Error fetching random product:", error);
+        console.error("Error fetching random product:", error.message);
         return <Text color="red.500">Error fetching random product</Text>;
     }
 
@@ -82,7 +83,10 @@ const SurpriseMe = () => {
                     <Button
                         mt={4}
                         colorScheme="teal"
-                        onClick={() => navigate('/')}
+                        onClick={() => {
+                            console.log("Navigating to home...");
+                            navigate('/');
+                        }}
                     >
                         Go Back Home
                     </Button>
@@ -93,4 +97,3 @@ const SurpriseMe = () => {
 };
 
 export default SurpriseMe;
-//
