@@ -63,9 +63,11 @@ const Navbar = () => {
 
             {/* Centered GIFTly Title */}
             <Spacer />
-            <Heading as="h1" size="lg" color="white" fontWeight="bold" textAlign="center">
-                GIFTly
-            </Heading>
+            <Box>
+                <Heading as="h1" size="lg" color="white" fontWeight="bold" textAlign="center">
+                    GIFTly
+                </Heading>
+            </Box>
             <Spacer />
 
             {/* Login/Register or User Info */}
