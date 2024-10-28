@@ -15,6 +15,8 @@ const Navbar = () => {
                 <li><Link to="/">Home</Link></li>
                 {/* Link to My Collection page */}
                 <li><Link to="/collection">My Collection</Link></li>
+                {/* Link to Gift History page */}
+                <li><Link to="/gift-history">Gift History</Link></li>
                 {/* Link to Login page */}
                 <li><Link to="/login">Login</Link></li>
             </ul>
@@ -24,3 +26,4 @@ const Navbar = () => {
 
 // Export the Navbar component as the default export
 export default Navbar;
+

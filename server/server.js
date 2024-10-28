@@ -9,7 +9,8 @@ const resolvers = require('./schema/resolvers');
 
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001
+; // Change 3001 to 3002
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
 const server = new ApolloServer({

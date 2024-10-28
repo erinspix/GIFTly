@@ -1,0 +1,61 @@
+.gift-history {
+    padding: 20px;
+    background-color: #fff3e0; /* Soft, warm background color */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif; /* Clean and readable font */
+    position: relative; /* Position for festive decorations */
+}
+
+.gift-history h2 {
+    margin-bottom: 20px;
+    font-size: 28px; /* Slightly larger font for title */
+    color: #c2185b; /* Holiday-themed deep pink */
+    text-align: center; /* Center the title */
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* Soft shadow for depth */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px; /* Space between title and table */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #ffab40; /* Festive border color */
+}
+
+th {
+    background-color: #ffe0b2; /* Light orange for header */
+    color: #5d4037; /* Darker text for contrast */
+    font-weight: bold; /* Bold text for headers */
+}
+
+td {
+    background-color: #fff; /* White background for table rows */
+    color: #333; /* Standard text color */
+}
+
+tr:hover {
+    background-color: #ffcc80; /* Light orange on hover for rows */
+}
+
+/* Add festive decorations */
+.gift-history:before {
+    content: '🎁'; /* Gift emoji at the top */
+    font-size: 50px; /* Large emoji */
+    position: absolute;
+    top: -25px; /* Position above the section */
+    left: calc(50% - 25px); /* Center it */
+}
+
+.gift-history:after {
+    content: '🎄'; /* Christmas tree emoji at the bottom */
+    font-size: 50px; /* Large emoji */
+    position: absolute;
+    bottom: -25px; /* Position below the section */
+    right: calc(50% - 25px); /* Center it */
+}
+
