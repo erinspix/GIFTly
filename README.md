@@ -28,7 +28,7 @@ The main landing page for the app, allowing users to search for gifts and explor
 ---
 
 ## User Page
-### Purpose
+### Purpose.
 Consolidates user login, settings, and account management into a single interface.
 
 ### Content
