@@ -31,15 +31,17 @@ const resolvers = {
         // New resolver to fetch a random product
         randomProduct: async () => {
             try {
-                const count = await Product.countDocuments(); // Get total number of products
-                const randomIndex = Math.floor(Math.random() * count); // Generate a random index
-                const randomProduct = await Product.findOne().skip(randomIndex); // Find product at random index
+                const count = await Product.countDocuments();
+                const randomIndex = Math.floor(Math.random() * count);
+                const randomProduct = await Product.findOne().skip(randomIndex);
+                console.log("Random product found:", randomProduct); // Debug: Log the found product
                 return randomProduct;
-            } catch (error) {
-                console.error("Error fetching random product:", error);
+            } catch (err) {
+                console.error("Error in randomProduct resolver:", err);
                 throw new Error("Failed to fetch random product");
             }
-        },
+        }
+        
     },
 
     Mutation: {
