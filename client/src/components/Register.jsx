@@ -1,5 +1,3 @@
-// client/src/components/Register.js
-
 import React, { useState } from 'react';
 import { useMutation, useApolloClient } from '@apollo/client';
 import { ADD_USER } from '../graphql/operations';
@@ -15,6 +13,8 @@ import {
     Text,
 } from '@chakra-ui/react';
 
+import './register.css'; // Import the new CSS file
+
 const Register = () => {
     const [formState, setFormState] = useState({
         username: '',
@@ -28,7 +28,6 @@ const Register = () => {
         onCompleted: (data) => {
             const { token } = data.addUser;
             localStorage.setItem('id_token', token);
-        //    client.resetStore(); // Refetch active queries, including ME_QUERY
             navigate('/'); // Redirect to homepage after registration
         },
     });
@@ -48,14 +47,13 @@ const Register = () => {
                 variables: { ...formState },
             });
         } catch (err) {
-            console.log("err: ", err.message);
-            console.error(err);
+            console.error('Registration submission error:', err);
         }
     };
 
     return (
-        <Box maxW="md" mx="auto" mt={8} p={6} borderWidth={1} borderRadius="lg">
-            <Heading mb={6} textAlign="center">Register</Heading>
+        <Box className="register-container" maxW="md" mx="auto" mt={8}>
+            <Heading className="register-heading">Register</Heading>
             <form onSubmit={handleSubmit}>
                 <VStack spacing={4}>
                     <FormControl id="username" isRequired>
@@ -65,6 +63,7 @@ const Register = () => {
                             name="username" 
                             value={formState.username} 
                             onChange={handleChange} 
+                            className="register-input"
                         />
                     </FormControl>
                     <FormControl id="email" isRequired>
@@ -74,6 +73,7 @@ const Register = () => {
                             name="email" 
                             value={formState.email} 
                             onChange={handleChange} 
+                            className="register-input"
                         />
                     </FormControl>
                     <FormControl id="password" isRequired>
@@ -83,10 +83,17 @@ const Register = () => {
                             name="password" 
                             value={formState.password} 
                             onChange={handleChange} 
+                            className="register-input"
                         />
                     </FormControl>
-                    <Button colorScheme="teal" type="submit" width="full">Register</Button>
-                    {error && <Text color="red.500">Registration Failed: {error.message}</Text>}
+                    <Button 
+                        type="submit" 
+                        width="full" 
+                        className="register-button"
+                    >
+                        Register
+                    </Button>
+                    {error && <Text className="register-error">Registration Failed: {error.message}</Text>}
                 </VStack>
             </form>
         </Box>

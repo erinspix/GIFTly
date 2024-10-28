@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { RANDOM_PRODUCT_QUERY } from '../graphql/operations';
-import { Box, Spinner, Text, Button, VStack, Image } from '@chakra-ui/react';
+import { Box, Spinner, Text, VStack, Image, Button } from '@chakra-ui/react';
+import { addToCart } from '../utils/cartUtils';
+import { useNavigate } from 'react-router-dom';
 
 const SurpriseMe = () => {
     const navigate = useNavigate();
-    const [fetchRandomProduct, { data, loading, error }] = useLazyQuery(RANDOM_PRODUCT_QUERY);
-    const [isNavigating, setIsNavigating] = useState(false);
+    const [fetchRandomProduct, { data, loading, error }] = useLazyQuery(RANDOM_PRODUCT_QUERY, {
+        fetchPolicy: 'network-only',
+    });
+    const [isProductFetched, setIsProductFetched] = useState(false);
 
-    // Fetch random product on component mount
     useEffect(() => {
-        fetchRandomProduct();
-    }, [fetchRandomProduct]);
-
-    // Handle fetched random product
-    useEffect(() => {
-        if (data?.randomProduct && !isNavigating) {
-            setIsNavigating(true); // Prevent further navigation triggers
-            navigate(`/product/${data.randomProduct._id}`);
+        if (!isProductFetched) {
+            fetchRandomProduct();
+            setIsProductFetched(true);
         }
-    }, [data, navigate, isNavigating]);
+    }, [fetchRandomProduct, isProductFetched]);
 
     // Handle loading and error states
     if (loading) return <Spinner size="xl" />;
@@ -30,9 +27,26 @@ const SurpriseMe = () => {
     const product = data?.randomProduct;
 
     return (
-        <Box textAlign="center" mt={8}>
+        <Box
+            position="relative"
+            textAlign="center"
+            mt={8}
+            px={8}
+            zIndex={1} // Ensure buttons are above other content
+        >
             {product ? (
-                <Box>
+                <Box
+                    borderWidth="1px"
+                    borderRadius="lg"
+                    overflow="hidden"
+                    p={4}
+                    bg="linear-gradient(to bottom right, #FFD700, #FFEC8B)"
+                    _hover={{
+                        bg: 'linear-gradient(to bottom right, #A9DFBF, #D4EFDF)',
+                        transform: 'scale(1.05)',
+                    }}
+                    transition="all 0.3s"
+                >
                     <VStack spacing={4} align="center">
                         <Image
                             src={`/images/${product.imageUrl}`}
@@ -50,9 +64,19 @@ const SurpriseMe = () => {
                             mt={2}
                             colorScheme="teal"
                             size="sm"
-                            onClick={() => navigate(`/product/${product._id}`)}
+                            zIndex={2} // Ensure button is clickable
+                            onClick={() => addToCart(product)}
                         >
-                            View Details
+                            Add to Cart
+                        </Button>
+                        <Button
+                            mt={2}
+                            variant="link"
+                            color="teal.500"
+                            zIndex={2} // Ensure button is clickable
+                            onClick={() => navigate('/')}
+                        >
+                            Go Back Home
                         </Button>
                     </VStack>
                 </Box>
