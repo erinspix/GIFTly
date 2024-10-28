@@ -8,8 +8,6 @@ import {
     Spacer,
     Button,
     Text,
-    Link,
-    Badge,
     Heading,
     Modal,
     ModalOverlay,
@@ -28,11 +26,12 @@ const Navbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [product, setProduct] = useState(null);
 
-    const [fetchRandomProduct, { data, loading, error }] = useLazyQuery(RANDOM_PRODUCT_QUERY, {
+    // Initialize lazy query for fetching a random product
+    const [fetchRandomProduct, { loading, error }] = useLazyQuery(RANDOM_PRODUCT_QUERY, {
         fetchPolicy: 'network-only',
         onCompleted: (data) => {
             if (data?.randomProduct) {
-                console.log("Random product fetched:", data.randomProduct);
+                console.log("Step 3: Random product fetched:", data.randomProduct);
                 setProduct(data.randomProduct);
             }
         },
@@ -42,13 +41,15 @@ const Navbar = () => {
     });
 
     const handleSurpriseMe = () => {
-        console.log("Opening Surprise Me modal...");
-        fetchRandomProduct(); // Fetch random product
+        console.log("Step 1: Opening Surprise Me modal...");
         onOpen(); // Open the modal
+        console.log("Step 2: Fetching random product...");
+        fetchRandomProduct(); // Fetch random product
     };
 
     return (
         <Flex bg="#0A3D62" p={4} color="white" alignItems="center" boxShadow="md">
+            {/* Home Button */}
             <Box>
                 <RouterLink to="/">
                     <Button
@@ -62,6 +63,7 @@ const Navbar = () => {
                 </RouterLink>
             </Box>
 
+            {/* Surprise Me Button */}
             <Box ml={2}>
                 <Button
                     variant="solid"
@@ -75,6 +77,7 @@ const Navbar = () => {
                 </Button>
             </Box>
 
+            {/* Centered GIFTly Title */}
             <Spacer />
             <Box>
                 <Heading as="h1" size="lg" color="white" fontWeight="bold" textAlign="center">
@@ -83,7 +86,8 @@ const Navbar = () => {
             </Box>
             <Spacer />
 
-            <Modal isOpen={isOpen} onClose={onClose}>
+            {/* Surprise Me Modal */}
+            <Modal isOpen={isOpen} onClose={onClose} isCentered>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Surprise Gift</ModalHeader>
@@ -92,7 +96,7 @@ const Navbar = () => {
                         {loading && <Spinner size="xl" />}
                         {error && <Text color="red.500">Error fetching product</Text>}
                         {product ? (
-                            <Box textAlign="center">
+                            <Box textAlign="center" mt={4}>
                                 <Image
                                     src={product.imageUrl}
                                     alt={product.name}
@@ -110,7 +114,7 @@ const Navbar = () => {
                                 </VStack>
                             </Box>
                         ) : (
-                            <Text>No product found.</Text>
+                            !loading && <Text>No product found.</Text>
                         )}
                     </ModalBody>
                 </ModalContent>
