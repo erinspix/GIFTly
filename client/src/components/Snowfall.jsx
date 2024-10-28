@@ -1,51 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import './snowflakes.css'; // Import your CSS
 
-const Snowfall = () => {
-    const [snowflakes, setSnowflakes] = useState([]);
+const Snowfall = ({ active }) => {
+    const [fallingItems, setFallingItems] = useState([]);
 
     useEffect(() => {
-        const createSnowflake = () => {
-            // Create a new snowflake with random properties
-            const newFlake = {
-                id: Math.random(), // Unique ID
-                left: Math.random(), // Random horizontal position
-                size: `${Math.random() * 2 + 0.5}rem`, // Random size between 0.5rem to 2.5rem
-                duration: `${Math.random() * 5 + 5}s`, // Random duration between 5s to 10s
-                delay: '0s', // No initial delay for each snowflake
+        if (!active) {
+            setFallingItems([]); // Clear the snowflakes when deactivated
+            return;
+        }
+
+        const createFallingItem = () => {
+            const newItem = {
+                id: Math.random(),
+                left: Math.random(),
+                size: `${Math.random() * 2 + 0.5}rem`,
+                duration: `${Math.random() * 5 + 5}s`,
+                delay: `${Math.random() * 2}s`,
+                symbol: Math.random() > 0.5 ? '🎁' : '🎄',
             };
 
-            // Add the new snowflake to the list
-            setSnowflakes((prevFlakes) => [...prevFlakes, newFlake]);
+            setFallingItems((prevItems) => [...prevItems, newItem]);
 
-            // Remove the snowflake after it reaches the bottom
             setTimeout(() => {
-                setSnowflakes((prevFlakes) =>
-                    prevFlakes.filter((flake) => flake.id !== newFlake.id)
+                setFallingItems((prevItems) =>
+                    prevItems.filter((item) => item.id !== newItem.id)
                 );
-            }, 10000); // 10s lifespan, matching max duration
+            }, 10000);
         };
 
-        // Set an interval to continuously create snowflakes every 200ms
-        const intervalId = setInterval(createSnowflake, 200);
+        const intervalId = setInterval(createFallingItem, 200);
 
-        return () => clearInterval(intervalId); // Cleanup on unmount
-    }, []);
+        return () => clearInterval(intervalId);
+    }, [active]);
 
     return (
         <div className="snow-container">
-            {snowflakes.map((flake) => (
+            {fallingItems.map((item) => (
                 <div
-                    key={flake.id}
+                    key={item.id}
                     className="snowflake"
                     style={{
-                        '--left': flake.left,
-                        '--size': flake.size,
-                        '--duration': flake.duration,
-                        '--delay': flake.delay,
+                        '--left': item.left,
+                        '--size': item.size,
+                        '--duration': item.duration,
+                        '--delay': item.delay,
                     }}
                 >
-                    ❄
+                    {item.symbol}
                 </div>
             ))}
         </div>
