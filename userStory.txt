@@ -16,9 +16,3 @@ THEN I am taken to a detailed page showing the item’s description, price, craf
 WHEN I add an item to my cart
 THEN the item is saved, and I can view my cart at any time to see a summary of the items I’ve selected
 
-WHEN I check out
-THEN I am prompted to securely input my payment information and shipping address, and the app confirms the purchase
-
-WHEN I choose the “Surprise Me” feature
-THEN I am shown a random gift idea based on my shopping history and preferences
-
