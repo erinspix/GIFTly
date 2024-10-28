@@ -86,8 +86,8 @@ Email: Ksjames@radford.edu
 GitHub: [emily myhand](https://github.com/emangelic)  
 Email: ema.angelic@outlook.com
 
-GitHub: [lily ebadi](https://github.com/erinspix)  
-Email: lily.ebadi@example.com
+GitHub: [lily ebadi](https://github.com/EbLily)  
+Email: lilly888_ebadi@yahoo.com
 
 ## Deployed Application
 You can find the live version of the app here: 
