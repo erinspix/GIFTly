@@ -10,12 +10,14 @@ import {
     Spinner,
 } from '@chakra-ui/react';
 
+import './profile.css'; // Import the CSS file
+
 const Profile = () => {
     const { loading, error, data } = useQuery(ME_QUERY, {
         fetchPolicy: 'cache-and-network', // Ensures fresh data
     });
 
-    if (loading) return <Spinner size="xl" />;
+    if (loading) return <Spinner size="xl" className="spinner" />;
     if (error) return <Text color="red.500">Error fetching profile</Text>;
 
     if (!data.me) {
@@ -24,12 +26,18 @@ const Profile = () => {
     }
 
     return (
-        <Box maxW="md" mx="auto" mt={8} p={6} borderWidth={1} borderRadius="lg">
-            <VStack spacing={4} align="start">
-                <Heading size="md">Profile</Heading>
-                <Text><strong>Username:</strong> {data.me.username}</Text>
-                <Text><strong>Email:</strong> {data.me.email}</Text>
-                <Text><strong>Member Since:</strong> {new Date(data.me.createdAt).toLocaleDateString()}</Text>
+        <Box className="profile-container" maxW="md" mx="auto" mt={8}>
+            <VStack spacing={4} align="center">
+                <Heading className="profile-heading" size="lg">Profile</Heading>
+                <Text className="profile-text">
+                    <span className="profile-highlight">Username:</span> {data.me.username}
+                </Text>
+                <Text className="profile-text">
+                    <span className="profile-highlight">Email:</span> {data.me.email}
+                </Text>
+                <Text className="profile-text">
+                    <span className="profile-highlight">Member Since:</span> {new Date(data.me.createdAt).toLocaleDateString()}
+                </Text>
             </VStack>
         </Box>
     );
