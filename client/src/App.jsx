@@ -10,6 +10,8 @@ import Profile from './components/Profile';
 import Products from './components/Products';
 import Cart from './components/Cart';
 import ProtectedRoute from './components/ProtectedRoute';
+import SurpriseMe from './components/SurpriseMe';
+
 
 const App = () => {
     return (
@@ -32,6 +34,7 @@ const App = () => {
             {/* Main content */}
             <Box p={4} px={8}>
                 <Routes>
+                <Route path="/surprise" element={<SurpriseMe />} />
                     <Route path="/" element={<Products />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
