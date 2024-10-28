@@ -38,7 +38,7 @@ const SurpriseMe = () => {
 
     // Display error state
     if (error) {
-        console.error("Error fetching random product:", error);
+        console.error("Error fetching random product:", error.message);
         return <Text color="red.500">Error fetching random product</Text>;
     }
 
@@ -66,7 +66,7 @@ const SurpriseMe = () => {
                 transition="all 0.3s"
             >
                 <Image
-                    src={product.imageUrl}
+                    src={`/images/${product.imageUrl}`} // Correct template literal
                     alt={product.name}
                     boxSize="150px"
                     objectFit="cover"
@@ -91,5 +91,9 @@ const SurpriseMe = () => {
         </Box>
     );
 };
+console.log("Total products count:", count);
+console.log("Selected random index:", randomIndex);
+console.log("Random product fetched:", randomProduct);
 
 export default SurpriseMe;
+//
