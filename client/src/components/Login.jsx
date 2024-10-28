@@ -13,7 +13,7 @@ import {
     Text,
 } from '@chakra-ui/react';
 
-import './login.css'; // Import the new CSS file
+import './Login.css'; // Import the new CSS file
 
 const Login = () => {
     const [formState, setFormState] = useState({
