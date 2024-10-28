@@ -1,5 +1,7 @@
+// components/PaymentForm.jsx
 import React from 'react';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
+import './PaymentForm.css';  // Ensure correct path
 
 const PaymentForm = () => {
   const stripe = useStripe();
@@ -27,8 +29,9 @@ const PaymentForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement />
+    <form className="payment-form" onSubmit={handleSubmit}>
+      <h2>Complete Your Payment</h2>
+      <CardElement className="StripeElement" />
       <button type="submit" disabled={!stripe}>
         Pay
       </button>

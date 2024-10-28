@@ -1,44 +1,43 @@
-/* styles/paymentForm.css */
+/* components/PaymentForm.css */
 .payment-form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-  }
-  
-  .payment-form h2 {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
-  .payment-form button {
-    width: 100%;
-    padding: 0.5rem;
-    border: none;
-    border-radius: 4px;
-    background-color: #4CAF50;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .payment-form button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .payment-form button:hover:not(:disabled) {
-    background-color: #45a049;
-  }
-  
-  .payment-form .StripeElement {
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.payment-form h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.payment-form button {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.payment-form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.payment-form button:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.payment-form .StripeElement {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
