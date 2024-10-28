@@ -69,7 +69,7 @@ const SurpriseMeModal = ({ isOpen, onClose }) => {
                         <Text color="red.500">Error fetching product</Text>
                     ) : product ? (
                         <Box
-                            bg="white"
+                            bg="teal"
                             p={4}
                             borderRadius="md"
                             boxShadow="0 4px 12px rgba(0, 0, 0, 0.2)"
