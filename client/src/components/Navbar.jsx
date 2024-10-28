@@ -1,168 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useLazyQuery, useQuery } from '@apollo/client';
-import { ME_QUERY, RANDOM_PRODUCT_QUERY } from '../graphql/operations';
-import {
-    Box,
-    Flex,
-    Spacer,
-    Button,
-    Text,
-    Heading,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalCloseButton,
-    Image,
-    VStack,
-    useDisclosure,
-    Spinner,
-} from '@chakra-ui/react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Box, Text } from '@chakra-ui/react';
 
-const Navbar = () => {
-    const navigate = useNavigate();
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const [product, setProduct] = useState(null);
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Register from './components/Register';
+import Login from './components/Login';
+import Profile from './components/Profile';
+import Products from './components/Products';
+import Cart from './components/Cart';
+import ProtectedRoute from './components/ProtectedRoute';
 
-    // Fetch user data to check authentication status
-    const { data: userData, loading: userLoading, error: userError } = useQuery(ME_QUERY, {
-        fetchPolicy: 'network-only',
-        onCompleted: (data) => {
-            console.log("User data fetched:", data);
-        },
-        onError: (err) => {
-            console.error("Error fetching user data:", err);
-        },
-    });
-
-    // Fetch random product
-    const [fetchRandomProduct, { loading: productLoading, error: productError }] = useLazyQuery(RANDOM_PRODUCT_QUERY, {
-        fetchPolicy: 'network-only',
-        onCompleted: (data) => {
-            if (data?.randomProduct) {
-                console.log("Random product fetched:", data.randomProduct);
-                setProduct(data.randomProduct);
-            }
-        },
-        onError: (err) => {
-            console.error("GraphQL Error:", err);
-        },
-    });
-
-    const handleSurpriseMe = () => {
-        console.log("Opening Surprise Me modal...");
-        onOpen();
-        fetchRandomProduct();
-    };
-
-    // If user data is still loading, show spinner
-    if (userLoading) return <Spinner size="lg" color="white" />;
-
+const App = () => {
     return (
-        <Flex bg="#0A3D62" p={4} color="white" alignItems="center" boxShadow="md">
-            {/* Home Button */}
-            <Box>
-                <RouterLink to="/">
-                    <Button
-                        variant="ghost"
-                        color="white"
-                        fontWeight="bold"
-                        _hover={{ bg: '#0A2A4D' }}
-                    >
-                        Home
-                    </Button>
-                </RouterLink>
+        <Router>
+            <Navbar />
+            
+            {/* Tagline */}
+            <Box 
+                bg="#5DADE2" 
+                color="white" 
+                py={3} 
+                textAlign="center" 
+                boxShadow="sm"
+            >
+                <Text fontSize="lg" fontWeight="bold" fontFamily="Poppins, sans-serif">
+                    Unique Handmade Gifts from Around the World, at Your Fingertips
+                </Text>
+            </Box>
+            
+            {/* Main content */}
+            <Box p={4} px={8}>
+                <Routes>
+                    <Route path="/" element={<Products />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route
+                        path="/profile"
+                        element={
+                            <ProtectedRoute>
+                                <Profile />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/cart"
+                        element={
+                            <ProtectedRoute>
+                                <Cart />
+                            </ProtectedRoute>
+                        }
+                    />
+                </Routes>
             </Box>
 
-            {/* Surprise Me Button */}
-            <Box ml={2}>
-                <Button
-                    variant="solid"
-                    color="white"
-                    bg="#5DADE2"
-                    fontWeight="bold"
-                    _hover={{ bg: '#3498DB' }}
-                    onClick={handleSurpriseMe}
-                >
-                    Surprise Me
-                </Button>
-            </Box>
-
-            {/* Centered GIFTly Title */}
-            <Spacer />
-            <Box>
-                <Heading as="h1" size="lg" color="white" fontWeight="bold" textAlign="center">
-                    GIFTly
-                </Heading>
-            </Box>
-            <Spacer />
-
-            {/* Login/Register or User Info */}
-            <Box>
-                {userError ? (
-                    <Text color="red.500">Error loading user data</Text>
-                ) : userData?.me ? (
-                    <Flex alignItems="center">
-                        <Text mr={4}>Hello, {userData.me.username}</Text>
-                        <Button colorScheme="teal" onClick={() => {
-                            console.log("Logging out...");
-                            localStorage.removeItem('id_token');
-                            window.location.reload();
-                        }}>
-                            Logout
-                        </Button>
-                    </Flex>
-                ) : (
-                    <Flex>
-                        <RouterLink to="/login">
-                            <Button variant="ghost" color="white" mr={4}>
-                                Login
-                            </Button>
-                        </RouterLink>
-                        <RouterLink to="/register">
-                            <Button colorScheme="teal">Register</Button>
-                        </RouterLink>
-                    </Flex>
-                )}
-            </Box>
-
-            {/* Surprise Me Modal */}
-            <Modal isOpen={isOpen} onClose={onClose} isCentered>
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Surprise Gift</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        {productLoading && <Spinner size="xl" />}
-                        {productError && <Text color="red.500">Error fetching product</Text>}
-                        {product ? (
-                            <Box textAlign="center" mt={4}>
-                                <Image
-                                    src={product.imageUrl}
-                                    alt={product.name}
-                                    boxSize="150px"
-                                    objectFit="cover"
-                                    mx="auto"
-                                />
-                                <VStack spacing={1} align="start" mt={2}>
-                                    <Text fontWeight="bold" fontSize="lg" color="#0A3D62">
-                                        {product.name}
-                                    </Text>
-                                    <Text color="#0A3D62">${product.price.toFixed(2)}</Text>
-                                    <Text color="gray.600">Craftsman: {product.craftsman}</Text>
-                                    <Text color="gray.600">Location: {product.location}</Text>
-                                </VStack>
-                            </Box>
-                        ) : (
-                            !productLoading && <Text>No product found.</Text>
-                        )}
-                    </ModalBody>
-                </ModalContent>
-            </Modal>
-        </Flex>
+            <Footer />
+        </Router>
     );
 };
 
-export default Navbar;
+export default App;
