@@ -24,6 +24,24 @@ const SurpriseMe = () => {
     return (
         <Box>
             <Text>Fetching a surprise gift for you...</Text>
+            <Box mt={2}>
+                            <VStack spacing={1} align="start">
+                                <Text fontWeight="bold" fontSize="lg" color="#0A3D62">
+                                    {product.name}
+                                </Text>
+                                <Text color="#0A3D62">${product.price.toFixed(2)}</Text>
+                                <Text color="gray.600">Craftsman: {product.craftsman}</Text>
+                                <Text color="gray.600">Location: {product.location}</Text>
+                                <Button
+                                    mt={2}
+                                    colorScheme="teal"
+                                    size="sm"
+                                    onClick={() => handleAddToCart(product)}
+                                >
+                                    Add to Cart
+                                </Button>
+                            </VStack>
+                        </Box>
         </Box>
     );
 };
