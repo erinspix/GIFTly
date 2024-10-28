@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useLazyQuery } from '@apollo/client';
-import { RANDOM_PRODUCT_QUERY } from '../graphql/operations';
+import { useLazyQuery, useQuery } from '@apollo/client';
+import { ME_QUERY, RANDOM_PRODUCT_QUERY } from '../graphql/operations';
 import {
     Box,
     Flex,
@@ -26,7 +26,17 @@ const Navbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [product, setProduct] = useState(null);
 
-    // Initialize lazy query for fetching a random product
+    // Fetch user data to check authentication status
+    const { data: userData, loading: userLoading, error: userError } = useQuery(ME_QUERY, {
+        fetchPolicy: 'network-only',
+        onCompleted: (data) => {
+            console.log("User data fetched:", data);
+        },
+        onError: (err) => {
+            console.error("Error fetching user data:", err);
+        },
+    });
+
     const [fetchRandomProduct, { loading, error }] = useLazyQuery(RANDOM_PRODUCT_QUERY, {
         fetchPolicy: 'network-only',
         onCompleted: (data) => {
@@ -46,6 +56,14 @@ const Navbar = () => {
         console.log("Step 2: Fetching random product...");
         fetchRandomProduct(); // Fetch random product
     };
+
+    useEffect(() => {
+        console.log("Checking user data...");
+        console.log("User data:", userData);
+    }, [userData]);
+
+    // Display loading state for user data
+    if (userLoading) return <Spinner size="lg" color="white" />;
 
     return (
         <Flex bg="#0A3D62" p={4} color="white" alignItems="center" boxShadow="md">
@@ -85,6 +103,35 @@ const Navbar = () => {
                 </Heading>
             </Box>
             <Spacer />
+
+            {/* Login/Register or User Info */}
+            <Box>
+                {userError ? (
+                    <Text color="red.500">Error loading user data</Text>
+                ) : userData && userData.me ? (
+                    <Flex alignItems="center">
+                        <Text mr={4}>Hello, {userData.me.username}</Text>
+                        <Button colorScheme="teal" onClick={() => {
+                            console.log("Logging out...");
+                            localStorage.removeItem('id_token');
+                            window.location.reload();
+                        }}>
+                            Logout
+                        </Button>
+                    </Flex>
+                ) : (
+                    <Flex>
+                        <RouterLink to="/login">
+                            <Button variant="ghost" color="white" mr={4}>
+                                Login
+                            </Button>
+                        </RouterLink>
+                        <RouterLink to="/register">
+                            <Button colorScheme="teal">Register</Button>
+                        </RouterLink>
+                    </Flex>
+                )}
+            </Box>
 
             {/* Surprise Me Modal */}
             <Modal isOpen={isOpen} onClose={onClose} isCentered>
