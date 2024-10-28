@@ -53,24 +53,27 @@ const Navbar = () => {
     if (loading) return null;
 
     return (
-        <Flex direction="column" align="center" color="white" boxShadow="md">
+        <Box w="100%" position="relative">
             {/* Top section with buttons */}
-            <Flex w="100%" alignItems="center" maxW="1200px" p={4} bg="#0A3D62">
+            <Flex
+                w="100%"
+                alignItems="center"
+                bg="#0A3D62"
+                p={4}
+                color="white"
+                boxShadow="md"
+                justifyContent="space-between"
+            >
                 <Box>
                     <RouterLink to="/">
                         <Button variant="ghost" color="white" fontWeight="bold">Home</Button>
                     </RouterLink>
                 </Box>
 
-                <Spacer />
-                <Box>
-                    <Heading as="h1" size="lg" color="white" fontWeight="bold">
-                        GIFTly
-                    </Heading>
-                </Box>
-                <Spacer />
+                <Heading as="h1" size="lg" color="white" fontWeight="bold">
+                    GIFTly
+                </Heading>
 
-                {/* Login/Register or User Info */}
                 <Box>
                     {data && data.me ? (
                         <Flex alignItems="center">
@@ -110,7 +113,7 @@ const Navbar = () => {
                     Unique Handmade Gifts from Around the World, at Your Fingertips
                 </Text>
             </Box>
-        </Flex>
+        </Box>
     );
 };
 
