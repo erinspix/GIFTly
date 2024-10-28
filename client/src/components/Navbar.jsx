@@ -37,11 +37,12 @@ const Navbar = () => {
         },
     });
 
-    const [fetchRandomProduct, { loading, error }] = useLazyQuery(RANDOM_PRODUCT_QUERY, {
+    // Fetch random product
+    const [fetchRandomProduct, { loading: productLoading, error: productError }] = useLazyQuery(RANDOM_PRODUCT_QUERY, {
         fetchPolicy: 'network-only',
         onCompleted: (data) => {
             if (data?.randomProduct) {
-                console.log("Step 3: Random product fetched:", data.randomProduct);
+                console.log("Random product fetched:", data.randomProduct);
                 setProduct(data.randomProduct);
             }
         },
@@ -51,18 +52,12 @@ const Navbar = () => {
     });
 
     const handleSurpriseMe = () => {
-        console.log("Step 1: Opening Surprise Me modal...");
-        onOpen(); // Open the modal
-        console.log("Step 2: Fetching random product...");
-        fetchRandomProduct(); // Fetch random product
+        console.log("Opening Surprise Me modal...");
+        onOpen();
+        fetchRandomProduct();
     };
 
-    useEffect(() => {
-        console.log("Checking user data...");
-        console.log("User data:", userData);
-    }, [userData]);
-
-    // Display loading state for user data
+    // If user data is still loading, show spinner
     if (userLoading) return <Spinner size="lg" color="white" />;
 
     return (
@@ -108,7 +103,7 @@ const Navbar = () => {
             <Box>
                 {userError ? (
                     <Text color="red.500">Error loading user data</Text>
-                ) : userData && userData.me ? (
+                ) : userData?.me ? (
                     <Flex alignItems="center">
                         <Text mr={4}>Hello, {userData.me.username}</Text>
                         <Button colorScheme="teal" onClick={() => {
@@ -140,8 +135,8 @@ const Navbar = () => {
                     <ModalHeader>Surprise Gift</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        {loading && <Spinner size="xl" />}
-                        {error && <Text color="red.500">Error fetching product</Text>}
+                        {productLoading && <Spinner size="xl" />}
+                        {productError && <Text color="red.500">Error fetching product</Text>}
                         {product ? (
                             <Box textAlign="center" mt={4}>
                                 <Image
@@ -161,7 +156,7 @@ const Navbar = () => {
                                 </VStack>
                             </Box>
                         ) : (
-                            !loading && <Text>No product found.</Text>
+                            !productLoading && <Text>No product found.</Text>
                         )}
                     </ModalBody>
                 </ModalContent>
