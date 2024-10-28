@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, useDisclosure } from '@chakra-ui/react';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -10,13 +10,15 @@ import Profile from './components/Profile';
 import Products from './components/Products';
 import Cart from './components/Cart';
 import ProtectedRoute from './components/ProtectedRoute';
-import SurpriseMe from './components/SurpriseMe';
-
+import SurpriseMeModal from './components/SurpriseMeModal'; // Import the modal
 
 const App = () => {
+    // Chakra UI modal state management
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     return (
         <Router>
-            <Navbar />
+            <Navbar onSurpriseMe={onOpen} /> {/* Pass onOpen as a prop */}
             
             {/* Tagline */}
             <Box 
@@ -34,7 +36,6 @@ const App = () => {
             {/* Main content */}
             <Box p={4} px={8}>
                 <Routes>
-                <Route path="/surprise" element={<SurpriseMe />} />
                     <Route path="/" element={<Products />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
@@ -56,7 +57,10 @@ const App = () => {
                     />
                 </Routes>
             </Box>
-            
+
+            {/* SurpriseMe Modal */}
+            <SurpriseMeModal isOpen={isOpen} onClose={onClose} />
+
             <Footer />
         </Router>
     );
