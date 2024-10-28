@@ -44,8 +44,8 @@ const Profile = () => {
                 <Box className="profile-info-box">
                     <Text className="profile-text">
                     <Text className="profile-text">
-    <span className="profile-highlight">Member Since:</span> 
-    "You've been part of our *'nice list'* since {new Date(data.me.createdAt).toLocaleDateString()}!"
+    <span className="profile-highlight">Member Status:</span> 
+    "NICE LIST!"
 </Text>
 
                     </Text>
