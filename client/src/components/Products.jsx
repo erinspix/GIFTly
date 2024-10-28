@@ -34,11 +34,11 @@ const Products = () => {
             const duration = Math.random() * 15 + 10; // Duration between 10s and 25s
             const delay = Math.random() * 5 + 3; // Delay between 3s and 8s
 
-            // Set CSS variables
-            snowflake.style.setProperty('--size', ${size}px);
-            snowflake.style.setProperty('--left', left);
-            snowflake.style.setProperty('--duration', ${duration}s);
-            snowflake.style.setProperty('--delay', ${delay}s);
+            // Set CSS variables using correct template literals
+            snowflake.style.setProperty('--size', `${size}px`);
+            snowflake.style.setProperty('--left', `${left}`);
+            snowflake.style.setProperty('--duration', `${duration}s`);
+            snowflake.style.setProperty('--delay', `${delay}s`);
 
             // Snowflake symbol
             snowflake.textContent = '❄️';
@@ -107,7 +107,7 @@ const Products = () => {
                         transition="all 0.3s"
                     >
                         <Image
-                            src={/images/${product.imageUrl}}
+                            src={`/images/${product.imageUrl}`} // Correct template literal
                             alt={product.name}
                             boxSize="150px"
                             objectFit="cover"
