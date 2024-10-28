@@ -15,7 +15,6 @@ const SurpriseMe = () => {
             console.log("Data received from GraphQL:", data);
             if (data?.randomProduct) {
                 setProduct(data.randomProduct);
-                console.log("Product set:", data.randomProduct);
             } else {
                 console.log("No product found in the response.");
             }
@@ -37,9 +36,13 @@ const SurpriseMe = () => {
         return <Spinner size="xl" />;
     }
 
-    // Display error state
+    // Display error state with retry logic
     if (error) {
         console.error("Error fetching random product:", error.message);
+        if (error.message.includes('canceled')) {
+            console.log("Retrying fetch...");
+            fetchRandomProduct(); // Retry fetching the random product
+        }
         return <Text color="red.500">Error fetching random product</Text>;
     }
 
@@ -59,9 +62,9 @@ const SurpriseMe = () => {
                 borderRadius="lg"
                 overflow="hidden"
                 p={4}
-                bg="linear-gradient(to bottom right, #FFD700, #FFEC8B)" // Soft gold gradient
+                bg="linear-gradient(to bottom right, #FFD700, #FFEC8B)"
                 _hover={{
-                    bg: 'linear-gradient(to bottom right, #A9DFBF, #D4EFDF)', // Soft green hover
+                    bg: 'linear-gradient(to bottom right, #A9DFBF, #D4EFDF)',
                     transform: 'scale(1.05)',
                 }}
                 transition="all 0.3s"
