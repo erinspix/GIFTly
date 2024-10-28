@@ -30,6 +30,22 @@ const SurpriseMe = () => {
         fetchRandomProduct();
     }, [fetchRandomProduct]);
 
+    // Update state when data is received
+    useEffect(() => {
+        if (data?.randomProduct) {
+            console.log("Random product data received:", data.randomProduct);
+            setProduct(data.randomProduct);
+        } else {
+            console.log("No product data received.");
+        }
+    }, [data]);
+
+    // Handle navigation back to home
+    const handleGoHome = () => {
+        console.log("Navigating to home...");
+        navigate('/'); // Explicitly navigate to home
+    };
+
     // Display loading state
     if (loading) {
         console.log("Loading random product...");
@@ -66,7 +82,7 @@ const SurpriseMe = () => {
                 transition="all 0.3s"
             >
                 <Image
-                    src={`/images/${product.imageUrl}`} // Correct template literal
+                    src={product.imageUrl}
                     alt={product.name}
                     boxSize="150px"
                     objectFit="cover"
@@ -82,7 +98,7 @@ const SurpriseMe = () => {
                     <Button
                         mt={4}
                         colorScheme="teal"
-                        onClick={() => navigate('/')}
+                        onClick={handleGoHome}
                     >
                         Go Back Home
                     </Button>
@@ -91,9 +107,5 @@ const SurpriseMe = () => {
         </Box>
     );
 };
-// console.log("Total products count:", count);
-// console.log("Selected random index:", randomIndex);
 console.log("Random product fetched:", randomProduct);
-
 export default SurpriseMe;
-//
