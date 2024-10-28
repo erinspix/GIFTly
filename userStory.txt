@@ -20,5 +20,5 @@ WHEN I check out
 THEN I am prompted to securely input my payment information and shipping address, and the app confirms the purchase
 
 WHEN I choose the “Surprise Me” feature
-THEN I am shown a random gift idea based on my shopping history and preferences
+THEN I am shown a random gift idea based on my shopping history and preferences ..
 
