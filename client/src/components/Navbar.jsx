@@ -10,12 +10,10 @@ import {
     Text,
     Heading,
     Badge,
-    IconButton,
 } from '@chakra-ui/react';
-import { FaSnowflake } from 'react-icons/fa'; // Import snowflake icon
 import { getCart } from '../utils/cartUtils';
 
-const Navbar = ({ toggleSnowfall, isSnowing }) => {
+const Navbar = () => {
     const { loading, data } = useQuery(ME_QUERY, {
         fetchPolicy: 'network-only',
     });
@@ -29,6 +27,7 @@ const Navbar = ({ toggleSnowfall, isSnowing }) => {
         setCartCount(totalItems);
     }, []);
 
+    // Update cart count whenever the cart changes
     useEffect(() => {
         const handleStorageChange = () => {
             const cart = getCart();
@@ -46,6 +45,7 @@ const Navbar = ({ toggleSnowfall, isSnowing }) => {
         localStorage.removeItem('id_token');
         localStorage.removeItem('cart');
         setCartCount(0);
+
         await client.clearStore();
         window.location.reload();
     };
@@ -60,8 +60,8 @@ const Navbar = ({ toggleSnowfall, isSnowing }) => {
             p={4}
             color="white"
             boxShadow="md"
-            w="100%"
         >
+            {/* Top section with buttons */}
             <Flex w="100%" alignItems="center" maxW="1200px">
                 <Box>
                     <RouterLink to="/">
@@ -76,17 +76,6 @@ const Navbar = ({ toggleSnowfall, isSnowing }) => {
                     </Heading>
                 </Box>
                 <Spacer />
-
-                {/* Snowflake Toggle Button */}
-                <IconButton
-                    icon={<FaSnowflake />}
-                    aria-label="Toggle Snowfall"
-                    onClick={toggleSnowfall}
-                    size="sm"
-                    colorScheme={isSnowing ? 'blue' : 'gray'}
-                    variant="ghost"
-                    ml={2}
-                />
 
                 {/* Login/Register or User Info */}
                 <Box>
@@ -117,18 +106,15 @@ const Navbar = ({ toggleSnowfall, isSnowing }) => {
             </Flex>
 
             {/* Tagline below GIFTly title */}
-            <Box
+            <Text
                 mt={2}
-                p={2}
-                w="100%"
-                bg="#5DADE2"
+                fontSize="lg"
+                fontWeight="bold"
+                fontFamily="Poppins, sans-serif"
                 textAlign="center"
-                color="white"
             >
-                <Text fontSize="lg" fontWeight="bold" fontFamily="Poppins, sans-serif">
-                    Unique Handmade Gifts from Around the World, at Your Fingertips
-                </Text>
-            </Box>
+                Unique Handmade Gifts from Around the World, at Your Fingertips
+            </Text>
         </Flex>
     );
 };
