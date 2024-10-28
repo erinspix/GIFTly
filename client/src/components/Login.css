@@ -1,64 +1,66 @@
 /* Login Container */
 .login-container {
-    background: linear-gradient(135deg, #E1F5FE, #B3E5FC); /* Soft blue gradient */
-    border: 2px solid #AEDFF7;
+    background: linear-gradient(135deg, #B3E5FC, #64B5F6); /* Bolder blue gradient */
+    border: 2px solid #3498DB; /* Darker blue border */
     border-radius: 16px;
     padding: 32px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Stronger shadow */
     transition: all 0.3s ease-in-out;
 }
 
 .login-container:hover {
     transform: translateY(-5px); 
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4); /* Even stronger shadow on hover */
 }
 
 /* Login Heading */
 .login-heading {
-    color: #0A3D62; 
+    color: #0A2A4D; /* Deeper navy blue */
     font-family: 'Poppins', sans-serif;
-    font-size: 2rem;
+    font-size: 2.2rem; /* Slightly larger font size */
     font-weight: bold;
     text-align: center;
     margin-bottom: 20px;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); /* Stronger text shadow */
 }
 
 /* Input Fields */
 .login-input {
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
-    border: 2px solid #AEDFF7; 
+    border: 2px solid #3498DB; /* Darker border for better contrast */
     border-radius: 8px;
-    padding: 8px;
-    transition: border 0.3s ease;
+    padding: 10px; /* Slightly more padding */
+    transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
 .login-input:focus {
-    border-color: #3498DB; 
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+    border-color: #1E88E5; /* More saturated blue on focus */
+    box-shadow: 0 0 10px rgba(30, 136, 229, 0.6); /* Stronger focus glow */
 }
 
 /* Login Button */
 .login-button {
-    background-color: #3498DB; 
+    background-color: #1E88E5; /* Darker button background */
     color: white;
     font-family: 'Poppins', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.2rem; /* Slightly larger font */
     font-weight: bold;
-    border-radius: 8px;
-    padding: 12px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 10px; /* Rounder corners */
+    padding: 14px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .login-button:hover {
-    background-color: #2980B9;
-    transform: scale(1.05);
+    background-color: #1565C0; /* Darker blue on hover */
+    box-shadow: 0 8px 16px rgba(21, 101, 192, 0.5); /* Button shadow on hover */
+    transform: scale(1.07); /* Slightly larger scale */
 }
 
 /* Error Message */
 .login-error {
-    color: red;
+    color: #E53935; /* Brighter red for better visibility */
     font-family: 'Poppins', sans-serif;
     margin-top: 10px;
+    font-weight: bold;
 }
