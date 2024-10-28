@@ -10,10 +10,12 @@ import {
     Text,
     Heading,
     Badge,
+    IconButton,
 } from '@chakra-ui/react';
+import { FaSnowflake } from 'react-icons/fa'; // Import snowflake icon
 import { getCart } from '../utils/cartUtils';
 
-const Navbar = () => {
+const Navbar = ({ toggleSnowfall, isSnowing }) => {
     const { loading, data } = useQuery(ME_QUERY, {
         fetchPolicy: 'network-only',
     });
@@ -27,7 +29,6 @@ const Navbar = () => {
         setCartCount(totalItems);
     }, []);
 
-    // Update cart count whenever the cart changes
     useEffect(() => {
         const handleStorageChange = () => {
             const cart = getCart();
@@ -45,7 +46,6 @@ const Navbar = () => {
         localStorage.removeItem('id_token');
         localStorage.removeItem('cart');
         setCartCount(0);
-
         await client.clearStore();
         window.location.reload();
     };
@@ -60,8 +60,8 @@ const Navbar = () => {
             p={4}
             color="white"
             boxShadow="md"
+            w="100%"
         >
-            {/* Top section with buttons */}
             <Flex w="100%" alignItems="center" maxW="1200px">
                 <Box>
                     <RouterLink to="/">
@@ -76,6 +76,17 @@ const Navbar = () => {
                     </Heading>
                 </Box>
                 <Spacer />
+
+                {/* Snowflake Toggle Button */}
+                <IconButton
+                    icon={<FaSnowflake />}
+                    aria-label="Toggle Snowfall"
+                    onClick={toggleSnowfall}
+                    size="sm"
+                    colorScheme={isSnowing ? 'blue' : 'gray'}
+                    variant="ghost"
+                    ml={2}
+                />
 
                 {/* Login/Register or User Info */}
                 <Box>
@@ -106,15 +117,18 @@ const Navbar = () => {
             </Flex>
 
             {/* Tagline below GIFTly title */}
-            <Text
+            <Box
                 mt={2}
-                fontSize="lg"
-                fontWeight="bold"
-                fontFamily="Poppins, sans-serif"
+                p={2}
+                w="100%"
+                bg="#5DADE2"
                 textAlign="center"
+                color="white"
             >
-                Unique Handmade Gifts from Around the World, at Your Fingertips
-            </Text>
+                <Text fontSize="lg" fontWeight="bold" fontFamily="Poppins, sans-serif">
+                    Unique Handmade Gifts from Around the World, at Your Fingertips
+                </Text>
+            </Box>
         </Flex>
     );
 };
