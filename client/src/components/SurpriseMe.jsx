@@ -30,22 +30,6 @@ const SurpriseMe = () => {
         fetchRandomProduct();
     }, [fetchRandomProduct]);
 
-    // Update state when data is received
-    useEffect(() => {
-        if (data?.randomProduct) {
-            console.log("Random product data received:", data.randomProduct);
-            setProduct(data.randomProduct);
-        } else {
-            console.log("No product data received.");
-        }
-    }, [data]);
-
-    // Handle navigation back to home
-    const handleGoHome = () => {
-        console.log("Navigating to home...");
-        navigate('/'); // Explicitly navigate to home
-    };
-
     // Display loading state
     if (loading) {
         console.log("Loading random product...");
@@ -54,7 +38,7 @@ const SurpriseMe = () => {
 
     // Display error state
     if (error) {
-        console.error("Error fetching random product:", error.message);
+        console.error("Error fetching random product:", error);
         return <Text color="red.500">Error fetching random product</Text>;
     }
 
@@ -63,9 +47,6 @@ const SurpriseMe = () => {
         console.log("No product data to display.");
         return <Text>Fetching a surprise gift for you...</Text>;
     }
-
-    // Log the fetched product data
-    console.log("Random product fetched:", product);
 
     // Render the product
     return (
@@ -101,7 +82,7 @@ const SurpriseMe = () => {
                     <Button
                         mt={4}
                         colorScheme="teal"
-                        onClick={handleGoHome}
+                        onClick={() => navigate('/')}
                     >
                         Go Back Home
                     </Button>
@@ -112,3 +93,4 @@ const SurpriseMe = () => {
 };
 
 export default SurpriseMe;
+//
