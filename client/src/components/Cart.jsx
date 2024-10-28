@@ -75,12 +75,13 @@ const Cart = () => {
                 {cartItems.map((item) => (
                     <Box key={item._id} p={4} borderWidth={1} borderRadius="md" boxShadow="md">
                         <HStack spacing={4}>
-                            <Image
-                                src={`/assets/${item.imageUrl}`}
-                                alt={item.name}
-                                boxSize="80px"
-                                objectFit="cover"
-                            />
+                        <Image
+    src={item.imageUrl}
+    alt={item.name}
+    boxSize="80px"
+    objectFit="cover"
+/>
+
                             <VStack align="start" spacing={1} flex="1">
                                 <Text fontWeight="bold" fontSize="lg">{item.name}</Text>
                                 <Text color="gray.600">${item.price.toFixed(2)}</Text>
@@ -125,5 +126,5 @@ const Cart = () => {
         </Box>
     );
 };
-
+console.log('Image URL:', item.imageUrl);
 export default Cart;

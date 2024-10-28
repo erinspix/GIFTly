@@ -8,14 +8,14 @@ import {
     Spacer,
     Button,
     Text,
-    Link,
+    Heading,
     Badge,
 } from '@chakra-ui/react';
 import { getCart } from '../utils/cartUtils';
 
 const Navbar = () => {
     const { loading, error, data } = useQuery(ME_QUERY, {
-        fetchPolicy: 'network-only', 
+        fetchPolicy: 'network-only',
     });
     const navigate = useNavigate();
     const client = useApolloClient();
@@ -47,23 +47,28 @@ const Navbar = () => {
         setCartCount(0);
         
         await client.clearStore();
-        // await client.refetchQueries({
-        //     include: [ME_QUERY],
-        // });
-        
         window.location.reload();
     };
 
-    if (loading) return null; 
+    if (loading) return null;
 
     return (
-        <Flex bg="teal.500" p={4} color="white" alignItems="center">
+        <Flex bg="#0A3D62" p={4} color="white" alignItems="center" boxShadow="md">
+            {/* Home Button */}
             <Box>
                 <RouterLink to="/">
-                    <Button variant="ghost" color="white">Home</Button>
+                    <Button variant="ghost" color="white" fontWeight="bold">Home</Button>
                 </RouterLink>
             </Box>
+
+            {/* Centered GIFTly Title */}
             <Spacer />
+            <Heading as="h1" size="lg" color="white" fontWeight="bold" textAlign="center">
+                GIFTly
+            </Heading>
+            <Spacer />
+
+            {/* Login/Register or User Info */}
             <Box>
                 {data && data.me ? (
                     <Flex alignItems="center">
