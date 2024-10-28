@@ -1,106 +1,86 @@
-/* General Reset and Global Styling */
-body, html {
+/* General Body Styling */
+body {
   margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background-color: #B3E5FC; /* Light blue for a winter feel */
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background-color: #B3E5FC; /* Light blue background for winter feel */
+  color: #0A3D62; /* Deep winter blue text */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-/* Headings Styling */
+/* Fun Heading Styling */
 h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
   color: #0A3D62; /* Deep winter blue */
-  margin: 0;
-  padding: 0;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Subtle drop shadow */
 }
 
-/* Product Box Styling */
-.product-box {
-  background: #F0F8FF; /* Light, soft blue (Alice Blue) */
-  border: 2px solid transparent;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  position: relative; /* For the glow effect */
+/* Code Block Styling */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  background-color: #D1F2EB; /* Soft teal background */
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #0A3D62; /* Deep winter blue text */
 }
-
-.product-box:hover {
-  background: #E0F7FA; /* Light teal for hover */
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 0 12px #5DADE2; /* Add glow effect */
-  border: 2px solid #5DADE2; /* Icy blue outline */
-}
-
-/* Glowing Effect on Box */
-.product-box::after {
-  content: '';
-  position: absolute;
-  top: -2px;
-  bottom: -2px;
-  left: -2px;
-  right: -2px;
-  border-radius: 12px;
-  border: 2px solid #5DADE2; /* Icy blue glow color */
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.product-box:hover::after {
-  opacity: 1;
-}
-
 
 /* Button Styling */
 button {
-  border-radius: 8px;
-  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
   background-color: #5DADE2; /* Icy blue */
   color: white;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
 button:hover {
   background-color: #3498DB; /* Deeper icy blue */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hover shadow */
+  transform: translateY(-2px); /* Fun lift effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Input Styling */
-input {
-  border: 1px solid #D3D3D3;
-  border-radius: 6px;
+button:active {
+  transform: translateY(1px); /* Pressed effect */
 }
 
-/* Snowflake Styling */
+/* Fun Container for Snowflakes */
 .snowflake {
-  color: #ADD8E6; /* Lighter blue for snowflakes */
-  position: absolute;
-  top: -10px;
-  left: calc(100% * var(--left));
-  font-size: var(--size);
-  opacity: 0.8;
-  animation: snow var(--duration) linear var(--delay) infinite;
+  color: #ADD8E6; /* Light blue for snowflakes */
+  animation: snow 15s linear infinite;
+  font-size: 1.5em; /* Slightly larger for a playful effect */
+  user-select: none; /* Prevent selecting snowflakes */
 }
 
-/* Snow Container Styling */
-.snow-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 9999;
-}
-
-/* Snowflake Animation */
+/* Snowfall Animation */
 @keyframes snow {
   0% {
-      transform: translateY(0);
-      opacity: 1;
+    transform: translateY(-10px);
+    opacity: 0.8;
   }
   100% {
-      transform: translateY(100vh);
-      opacity: 0.3; /* Fade-out effect */
+    transform: translateY(100vh);
+    opacity: 0.3;
   }
+}
+
+/* Box Styling for Fun */
+.product-box {
+  background: #90EE90; /* Soft Kelly Green */
+  border: 2px solid #66CDAA; /* Light teal border */
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.product-box:hover {
+  background: #66CDAA; /* Light teal on hover */
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }

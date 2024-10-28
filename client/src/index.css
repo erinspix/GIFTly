@@ -71,8 +71,8 @@ button:active {
 
 /* Box Styling for Fun */
 .product-box {
-  background: #FFFDE7; /* Light cream */
-  border: 2px solid #AEDFF7; /* Soft blue */
+  background: #90EE90; /* Soft Kelly Green */
+  border: 2px solid #66CDAA; /* Light teal border */
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -80,7 +80,7 @@ button:active {
 }
 
 .product-box:hover {
-  background: #D1F2EB; /* Light teal on hover */
+  background: #66CDAA; /* Light teal on hover */
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
