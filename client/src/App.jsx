@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Box } from '@chakra-ui/react';
 
 import Navbar from './components/Navbar';
+import Footer from './components/Footer'; // Import the Footer component
 import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
@@ -16,7 +17,7 @@ const App = () => {
     return (
         <Router>
             <Navbar />
-            <Box p={4}>
+            <Box p={4} flex="1">
                 <Routes>
                     <Route path="/" element={<Products />} />
                     <Route path="/register" element={<Register />} />
@@ -39,6 +40,7 @@ const App = () => {
                     />
                 </Routes>
             </Box>
+            <Footer /> {/* Add the Footer component here */}
         </Router>
     );
 };
